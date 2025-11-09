@@ -143,8 +143,8 @@ const storeData = [
   {"ivr_code": 1803100, "store_name": "嘉義興業", "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/5FAyzAPSpXDQSntY8", "place_id": "ChIJMdRw7DCXbjQRkl6vb-L130U"}
 ];
 
-// !! WARNING: 請務必替換此處的金鑰為您最新、最乾淨、且已設定限制的新金鑰 !!
-const apiKey = "AIzaSyC8PAvDsG5ps1lWhB44PT-1lUpD4mWoF1E"; // <--- 請貼上您重新產生並複製的金鑰
+// !! WARNING: API 金鑰已移除，此模式用於測試網路連線。!!
+const apiKey = "KEY_REMOVED_FOR_TESTING"; 
 
 // 獲取 DOM 元素
 const statusDiv = document.getElementById("status");
@@ -181,17 +181,13 @@ function renderTable() {
 }
 
 /**
- * 透過 Place ID 獲取評論總數 - 內含測試模式
+ * 透過 Place ID 獲取評論總數 - 【金鑰隔離測試模式】
+ * * - 此函式已移除 API 金鑰參數。
  */
 async function getReviewCount(placeId) {
-  // ------------------------------------------------------------------------------------------
-  // 【A】測試連線與金鑰的最佳模式 (請取消下一行的註解，並註解掉再下一行)
-  // const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=user_ratings_total`;
+  // 注意：這裡移除了 &key=${apiKey} 參數
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=user_ratings_total`;
   
-  // 【B】正式運作與金鑰的模式 (預設為此模式，如果測試 A 成功，請改回此模式)
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=user_ratings_total&key=${apiKey}`;
-  // ------------------------------------------------------------------------------------------
-
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 秒超時
 
@@ -206,17 +202,18 @@ async function getReviewCount(placeId) {
     const data = await res.json();
 
     if (data.status === "OK") {
+      // 在沒有金鑰的情況下，通常不會到這裡
       return data.result?.user_ratings_total || 0;
     } else {
-      // 捕捉 Google API 內部的錯誤狀態 (REQUEST_DENIED, OVER_QUERY_LIMIT, etc.)
+      // 這是我們期望的結果：連線成功，但 Google 拒絕了請求
+      // 預期會回傳 "API Status: REQUEST_DENIED" (因缺少金鑰)
       throw new Error(`API Status: ${data.status}`);
     }
   } catch (err) {
     clearTimeout(timeoutId); // 清除超時
     
-    // 如果是連線失敗的錯誤，會被捕捉到這裡
     if (err.name === 'AbortError') {
-        throw new Error("Timeout (5s)"); // 如果是超時
+        throw new Error("Timeout (5s)"); 
     }
     // 關鍵：將網路錯誤拋出，讓使用者看到
     throw new Error(`網路錯誤: ${err.message || "Unknown Fetch Error"}`); 
