@@ -1,0 +1,542 @@
+[
+  {
+    "ivr_code": 1801517,
+    "store_name": "淡水竹圍",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/1Xtsng54pP8S2xx7A",
+    "place_id": "ChIJcfH2zHWvQjQRpWq0dQCd88Y"
+  },
+  {
+    "ivr_code": 1801396,
+    "store_name": "淡水北新",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/VfeyYLUCkdRc8tp28",
+    "place_id": "ChIJlSxj7lWlQjQR3c_yERP0lZA"
+  },
+  {
+    "ivr_code": 1801361,
+    "store_name": "基隆大武崙",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/xteXJtuFFpftg8rG7",
+    "place_id": "ChIJYc6Vdd1NXTQRT5kpNwj6ffY"
+  },
+  {
+    "ivr_code": 1801530,
+    "store_name": "蘆洲中原",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/qQVaidgyN4Tas3jh8",
+    "place_id": "ChIJg7UHyzSpQjQRkSDDVPywquc"
+  },
+  {
+    "ivr_code": 1805109,
+    "store_name": "台北瑞芳",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/oGiLzLdR2qQzVpCG7",
+    "place_id": "ChIJU82qo_dPXTQRDCTNmaLJrJ4"
+  },
+  {
+    "ivr_code": 1801312,
+    "store_name": "基隆暖暖",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/Zna1dsuZYRsE2Xas6",
+    "place_id": "ChIJ2Z6f0O5RXTQRCVg800aJyzE"
+  },
+  {
+    "ivr_code": 1805111,
+    "store_name": "瑞芳民生",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/W6ovdLiFfqZ8GNnBA",
+    "place_id": "ChIJe7QRRfdPXTQRRzT7NTV2_gU"
+  },
+  {
+    "ivr_code": 1801447,
+    "store_name": "新莊西盛",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/YTmykwzBdZJWdnij6",
+    "place_id": "ChIJdQmXll4daDQRDj6apX5zP7c"
+  },
+  {
+    "ivr_code": 1801529,
+    "store_name": "三重三和",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/CPnKhEw1JUq6ycqj6",
+    "place_id": "ChIJ5-xntw6pQjQR382FPm7-E0s"
+  },
+  {
+    "ivr_code": 1801286,
+    "store_name": "三重溪尾",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/uRnoqzVnEYXPjYPX8",
+    "place_id": "ChIJz2D0YtaoQjQRKMG5HpJoRp0"
+  },
+  {
+    "ivr_code": 1801511,
+    "store_name": "三重五華",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/eeQmv4U2LNzCWSobA",
+    "place_id": "ChIJD7guYJypQjQR8xDWnSJT3Fs"
+  },
+  {
+    "ivr_code": 1801181,
+    "store_name": "淡水新市",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/heZ3G9pThCuuDb5M9",
+    "place_id": "ChIJg5Wi2gO7QjQRYn2k1fplEds"
+  },
+  {
+    "ivr_code": 1801423,
+    "store_name": "樹林中華二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/6gDiysx7ezAi52o8A",
+    "place_id": "ChIJLejWYEgdaDQR23vveJnodUU"
+  },
+  {
+    "ivr_code": 1801482,
+    "store_name": "基隆百福",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/7U4FzX2JA2GzytPj6",
+    "place_id": "ChIJH4T39k1TXTQR2SjxEOb8ouY"
+  },
+  {
+    "ivr_code": 1801500,
+    "store_name": "八里中山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/U28NPsE7vFEF1kto7",
+    "place_id": "ChIJs-fqLBqlQjQRn4JWBB6onE4"
+  },
+  {
+    "ivr_code": 1801489,
+    "store_name": "新莊富國",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/oFWH8y756oKjxfXT9",
+    "place_id": "ChIJG1w1ZD6nQjQRBlO6rjXvEEo"
+  },
+  {
+    "ivr_code": 1801289,
+    "store_name": "三峽北大",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/tcCC5otUogn2wFtL7",
+    "place_id": "ChIJbbM7SgocaDQR56insh14W9g"
+  },
+  {
+    "ivr_code": 1801450,
+    "store_name": "萬華桂林",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/EHmJrvux4jww4tg86",
+    "place_id": "ChIJQyNLlGmpQjQR60fbB_Bhd7Y"
+  },
+  {
+    "ivr_code": 1801427,
+    "store_name": "鶯歌建國",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/aNuaQ1aV3eBGbm8z9",
+    "place_id": "ChIJuVRuK6oeaDQR2M9xKVekZiw"
+  },
+  {
+    "ivr_code": 1801390,
+    "store_name": "三重中正北",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/Qh3BijenmrfMsU7B9",
+    "place_id": "ChIJCzEu7MKoQjQR-UIHew7bL6M"
+  },
+  {
+    "ivr_code": 1801532,
+    "store_name": "木柵木新",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/MefVfJ3D1vgU8cGB9",
+    "place_id": "ChIJmZ7Tb6cBaDQR2MaGr_3a-nM"
+  },
+  {
+    "ivr_code": 1801507,
+    "store_name": "新莊幸福",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/xrgsruPEVrNn5ppQA",
+    "place_id": "ChIJ4x0YORGpQjQRbu8abaxg4JQ"
+  },
+  {
+    "ivr_code": 1801239,
+    "store_name": "土城金城",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/ySthwm2jce32pFEV7",
+    "place_id": "ChIJfV6yXicDaDQRNPILhbacyxU"
+  },
+  {
+    "ivr_code": 1801100,
+    "store_name": "中和員山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/KP8sytfG5YStsNeh8",
+    "place_id": "ChIJU8aAIIMCaDQRD3gfzGHnp28"
+  },
+  {
+    "ivr_code": 1801307,
+    "store_name": "新莊中港",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/MAPvpQepENbDS74N9",
+    "place_id": "ChIJJYqbx8WpQjQRrJ3EYR0_Vms"
+  },
+  {
+    "ivr_code": 1808101,
+    "store_name": "五股新城",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/rPTCtS36e1FujCoc7",
+    "place_id": "ChIJMQMJk82pQjQR-uqeUYn-CFw"
+  },
+  {
+    "ivr_code": 1801115,
+    "store_name": "蘆洲長安",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/vNX1yX87ebkAPuxw8",
+    "place_id": "ChIJI-ogO7qoQjQRrPqI-_OsOS4"
+  },
+  {
+    "ivr_code": 1801503,
+    "store_name": "五股成泰",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/kxHvkEYwfyobMwJQ9",
+    "place_id": "ChIJR9i4eRmmQjQR9MoB4IyYMKw"
+  },
+  {
+    "ivr_code": 1801524,
+    "store_name": "七堵明德",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/sz32fFLnZLvSeaGm7",
+    "place_id": "ChIJVx7HCB9SXTQR8dHa3H082_U"
+  },
+  {
+    "ivr_code": 1801534,
+    "store_name": "基隆聖心",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/GvoTW6PJ8BSnCWcWA",
+    "place_id": "ChIJ-Z6T2qJPXTQRw7AEIJAfA7o"
+  },
+  {
+    "ivr_code": 1801514,
+    "store_name": "羅東中正",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/LkV6RY3nvTd7wNGJ9",
+    "place_id": "ChIJ1f6eTG3nZzQR-luuEYNn0qg"
+  },
+  {
+    "ivr_code": 1801497,
+    "store_name": "羅東興東二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/95XyShw6MRwBnwTm7",
+    "place_id": "ChIJLZnIVCrnZzQROpaV_HW9oBI"
+  },
+  {
+    "ivr_code": 1801469,
+    "store_name": "板橋篤行",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/vB26JhrVrNdkhses8",
+    "place_id": "ChIJD7JCnzwdaDQRQUJo_eaitf0"
+  },
+  {
+    "ivr_code": 1801512,
+    "store_name": "三重三民二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/PqjBYCu99S6TtoXcA",
+    "place_id": "ChIJXcrPmXKpQjQR9LOW0nmT3vw"
+  },
+  {
+    "ivr_code": 1801537,
+    "store_name": "樹林育英",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/KYtpcoz9kRiCs3CQ6",
+    "place_id": "ChIJ2wNQwpsdaDQRY6jhDgo6LfA"
+  },
+  {
+    "ivr_code": 1801485,
+    "store_name": "林口麗林",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/fA2ErdDFAKbNr3vM6",
+    "place_id": "ChIJ_54NEAWnQjQRK0CNc8e1Iu8"
+  },
+  {
+    "ivr_code": 1801379,
+    "store_name": "宜蘭頭城",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/ZekMzq6iyEdxywKH7",
+    "place_id": "ChIJPab-WEL3ZzQRbX4daKxUlEo"
+  },
+  {
+    "ivr_code": 1808171,
+    "store_name": "花蓮中山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/xN5CQquAjwQDXSpu7",
+    "place_id": "ChIJ_9Hi3bmfaDQRpX8l_Wv6KF8"
+  },
+  {
+    "ivr_code": 1801536,
+    "store_name": "宜蘭礁溪",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/C5kwo8CuJCtSviTn8",
+    "place_id": "ChIJb8bKWUn6ZzQRuBaQNPkPoJ4"
+  },
+  {
+    "ivr_code": 1801531,
+    "store_name": "泰山明志二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/DRmQ7WaWzCgKt5pT9",
+    "place_id": "ChIJ4datG8ynQjQRKtjmPHEmXK0"
+  },
+  {
+    "ivr_code": 1801431,
+    "store_name": "吉安中華",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/jiXjKkhJfhxs8NQR8",
+    "place_id": "ChIJATXRpJ2faDQRqZXOmWc5DT8"
+  },
+  {
+    "ivr_code": 1801343,
+    "store_name": "蘇澳中山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/R4SRsXaj3BqLUKGS8",
+    "place_id": "ChIJiY1QEDfoZzQRRr2u9WzB0mA"
+  },
+  {
+    "ivr_code": 1801172,
+    "store_name": "鶯歌南昌",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/Ti32VSe8NRbXqJG89",
+    "place_id": "ChIJxSinw6seaDQRMB2pr6MSqcY"
+  },
+  {
+    "ivr_code": 1801433,
+    "store_name": "林口文化二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/AbM4GF4Gbf4cVBxX9",
+    "place_id": "ChIJF3kMoQmnQjQR9x7OgYIxyOs"
+  },
+  {
+    "ivr_code": 1801493,
+    "store_name": "中和泰和",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/zLTQj7dozh9Cbvds6",
+    "place_id": "ChIJGQ66XxblZzQRgX7M5xFfAck"
+  },
+  {
+    "ivr_code": 1801454,
+    "store_name": "宜蘭員山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/SMcGi8rZiAcGQg326",
+    "place_id": "ChIJ0X33weLlZzQRxmDrU3qz49I"
+  },
+  {
+    "ivr_code": 1801317,
+    "store_name": "樹林樹新",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/N23VTrTuZdTf3x3g8",
+    "place_id": "ChIJrdFwoXkdaDQRBYU_p7sG2-A"
+  },
+  {
+    "ivr_code": 1801336,
+    "store_name": "三峽文化",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/n4DvASz2Kfe7NGQ38",
+    "place_id": "ChIJqUmvzvIbaDQR9lOqJNfY4Wo"
+  },
+  {
+    "ivr_code": 1805116,
+    "store_name": "基隆深溪",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/3ZbmPixbhEdXM77u6",
+    "place_id": "ChIJrYVcXaNPXTQRQ96qktRUmf8"
+  },
+  {
+    "ivr_code": 1808199,
+    "store_name": "花蓮玉里",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/7dUeYhtHHfYzyTev7",
+    "place_id": "ChIJh-eIRHlqbzQRKbGVAkTVack"
+  },
+  {
+    "ivr_code": 1801398,
+    "store_name": "蘆洲民族三",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/Vwq8Pyfo1SPCALg78",
+    "place_id": "ChIJ7VJ1bL6pQjQRU4_aX-nDOVY"
+  },
+  {
+    "ivr_code": 1801366,
+    "store_name": "三峽光明",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/u1v3HR3N2hVRaUyBA",
+    "place_id": "ChIJQZXasO0baDQRWDUcv06TPoc"
+  },
+  {
+    "ivr_code": 1807037,
+    "store_name": "桃園鶯桃",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/rfH6pNadmMdim1tS9",
+    "place_id": "ChIJM5Uy18MeaDQRCGu7nATMgUE"
+  },
+  {
+    "ivr_code": 1807038,
+    "store_name": "台南東寧二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/QCXhWAKAfM8tLaBM8",
+    "place_id": "ChIJMxRO5b12bjQRjQHXDQofOT0"
+  },
+  {
+    "ivr_code": 1807023,
+    "store_name": "中和景平",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/jGapmovvzm3p95mj7",
+    "place_id": "ChIJY5ZLIncCaDQREKpdNW2XxHs"
+  },
+  {
+    "ivr_code": 1807014,
+    "store_name": "永康中北",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/kUu7xJ4K6k2W9Pws5",
+    "place_id": "ChIJwxM2lc5wbjQRqAfbhaI-pW4"
+  },
+  {
+    "ivr_code": 1807001,
+    "store_name": "嘉義義竹",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/vq8SDHVcCqp2NBsQ8",
+    "place_id": "ChIJrW18EPiDbjQRCZKgI3-WTlY"
+  },
+  {
+    "ivr_code": 1807005,
+    "store_name": "學甲中正",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/aKuYyDgAmi4wKN1K9",
+    "place_id": "ChIJJRhAmhl_bjQRXhE_BUwKCpU"
+  },
+  {
+    "ivr_code": 1807006,
+    "store_name": "白河康樂",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/337UtuxwggskPdJ28",
+    "place_id": "ChIJyS8p4aGPbjQRfuYVencnIj4"
+  },
+  {
+    "ivr_code": 1807008,
+    "store_name": "關廟中山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/YBN2SFrqkiKVG1jL9",
+    "place_id": "ChIJUdPL_PNxbjQR7mzrSWX-DbU"
+  },
+  {
+    "ivr_code": 1807011,
+    "store_name": "苗栗公館",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/ZRUUSDY7TuPYtTUs7",
+    "place_id": "ChIJoRcKBF6raTQRIg9HzR2gSq4"
+  },
+  {
+    "ivr_code": 1807016,
+    "store_name": "台南西港",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/utY1kEWjb23DuV6t5",
+    "place_id": "ChIJaXNlch95bjQR3onXGofN_zw"
+  },
+  {
+    "ivr_code": 1807018,
+    "store_name": "屏東大連",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/j7TXZsCVzhgqawTG7",
+    "place_id": "ChIJF3lzwr8XbjQRDydstfdqHH4"
+  },
+  {
+    "ivr_code": 1807024,
+    "store_name": "屏東廣東二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/R95QKbYb7ZUEjNvm6",
+    "place_id": "ChIJ149vFwsXbjQR7gp22c1cjAw"
+  },
+  {
+    "ivr_code": 1807030,
+    "store_name": "鳳山南京",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/V6qyzuFDTQG6w7Tq9",
+    "place_id": "ChIJ7UBB8FQbbjQRVYHJGHzU_9Y"
+  },
+  {
+    "ivr_code": 1807039,
+    "store_name": "大溪康莊",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/aWoH9L36L29qAHab8",
+    "place_id": "ChIJYUQg0W0ZaDQRAwuC0LiVGLg"
+  },
+  {
+    "ivr_code": 1807012,
+    "store_name": "水上中山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/kHCygkh2YK9r1iBu7",
+    "place_id": "ChIJLYDSfiKRbjQRxn-F29U-LOM"
+  },
+  {
+    "ivr_code": 1807015,
+    "store_name": "善化中正",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/jxt3ha3QJU9oRcR26",
+    "place_id": "ChIJGSqTc_97bjQRHhiCrMKdq9Q"
+  },
+  {
+    "ivr_code": 1807021,
+    "store_name": "屏東萬丹",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/PnSHV3Li8eGMcDgF8",
+    "place_id": "ChIJj0kjb2QZbjQReCqH73O4Bvg"
+  },
+  {
+    "ivr_code": 1807027,
+    "store_name": "金山中山二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/DFM9n8iiuKJyWnks7",
+    "place_id": "ChIJ_Wu7BahMXTQRP0ow_mJY0Vk"
+  },
+  {
+    "ivr_code": 1807029,
+    "store_name": "仁德中正",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/bsfixqZ46K8vS1TP8",
+    "place_id": "ChIJW05cPvZzbjQRwqi8UJgY9jo"
+  },
+  {
+    "ivr_code": 1807042,
+    "store_name": "蘆洲集賢",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/CvvuQ7K4umrp1EYW8",
+    "place_id": "ChIJnfCCYxipQjQRUmBdUBN2dEY"
+  },
+  {
+    "ivr_code": 1807004,
+    "store_name": "屏東林邊",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/GqmJHMjgLdpUQ77x5",
+    "place_id": "ChIJyRRWX4XgcTQRG1GiqpbW7Yw"
+  },
+  {
+    "ivr_code": 1807022,
+    "store_name": "屏東屏一",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/piJJEZQCyaKRg69Y7",
+    "place_id": "ChIJtzIIc4IXbjQR0ukYE6Fm8HM"
+  },
+  {
+    "ivr_code": 1807031,
+    "store_name": "台東東海",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/RbNtGrthi66Kp2mn8",
+    "place_id": "ChIJVfJixD25bzQRS0o6CgO-6LU"
+  },
+  {
+    "ivr_code": 1807036,
+    "store_name": "台南麻豆",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/trrY8PTZy5VCmu5U8",
+    "place_id": "ChIJ3z7ajVZ_bjQRvxDfhcy67us"
+  },
+  {
+    "ivr_code": 1807017,
+    "store_name": "屏東明治",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/K1kZi4G4ZzFNzzmg8",
+    "place_id": "ChIJB8AdEaQXbjQR5_n-Q0tvV5c"
+  },
+  {
+    "ivr_code": 1807034,
+    "store_name": "竹北三民",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/24psh4zQJobg9oUP6",
+    "place_id": "ChIJfW0B1Oo2aDQRQDZeT8YVB_w"
+  },
+  {
+    "ivr_code": 1808181,
+    "store_name": "土城裕民二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/rmEPvnQZD6bajJ2D7",
+    "place_id": "ChIJb49eR-cDaDQRbuBXLWHkR18"
+  },
+  {
+    "ivr_code": 1801198,
+    "store_name": "板橋南雅",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/QToRaPbzV6WYJyno6",
+    "place_id": "ChIJZ-exwKgCaDQRXR4OJNnj7nM"
+  },
+  {
+    "ivr_code": 1801384,
+    "store_name": "蘆洲光華",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/3PaVZP42fHqHoDXD8",
+    "place_id": "ChIJz-drycmoQjQR4cHpjESE02g"
+  },
+  {
+    "ivr_code": 1801209,
+    "store_name": "台北深坑",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/uRfusccmYRaArxoF9",
+    "place_id": "ChIJ1XHeKc6qQjQRa-bWk3l55rI"
+  },
+  {
+    "ivr_code": 1801146,
+    "store_name": "板橋新海",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/J6MLqXSKag69GSkMA",
+    "place_id": "ChIJsdPPQRGoQjQR3-rMf0jF-Jo"
+  },
+  {
+    "ivr_code": 1801179,
+    "store_name": "板橋忠孝",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/QneLXfqCuwCFBDaLA",
+    "place_id": "ChIJ0Z1dX6ECaDQRx8D41_bmN40"
+  },
+  {
+    "ivr_code": 1801385,
+    "store_name": "新莊民安",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/uQFmMusK7Z4ye7Kp6",
+    "place_id": "ChIJFf4rH_OnQjQRaP9WnO_dyOA"
+  },
+  {
+    "ivr_code": 1801214,
+    "store_name": "樹林中山二",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/2Z3QW49ixY8y2QbH6",
+    "place_id": "ChIJ-V-bMD4daDQR-cKp_Du-i_s"
+  },
+  {
+    "ivr_code": 1803263,
+    "store_name": "高雄茄萣",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/8q3FKJ7XGY79jxqX8",
+    "place_id": "ChIJfwuNiXN1bjQRPoCNs3zn6IY"
+  },
+  {
+    "ivr_code": 1801346,
+    "store_name": "汐止忠孝",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/Jw8N6F5NG6BFnkeD7",
+    "place_id": "ChIJYwPzRG1TXTQRN0Ma6LxzY2M"
+  },
+  {
+    "ivr_code": 1803261,
+    "store_name": "麻豆中山",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/Dpayeykf5H4vN2wh7",
+    "place_id": "ChIJ3z7ajVZ_bjQRvxDfhcy67us"
+  },
+  {
+    "ivr_code": 1803100,
+    "store_name": "嘉義興業",
+    "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/5FAyzAPSpXDQSntY8",
+    "place_id": "ChIJMdRw7DCXbjQRkl6vb-L130U"
+  }
+]
