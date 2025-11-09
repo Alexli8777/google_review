@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh>遠傳加盟門市評論工具</title><html lang="zh-TW">
-  https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js</script>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>遠傳加盟門市評論工具</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
     h1 { color: #d32f2f; }
@@ -27,7 +30,6 @@
     const apiKey = "AIzaSyBjCmx5gI49M1ik9K-KXBWp0Bdb9hGjHDQ";
     let storeData = [];
 
-    // 載入 JSON 資料
     fetch('store_list_with_reviews.json')
       .then(response => {
         if (!response.ok) throw new Error("JSON 載入失敗");
@@ -58,7 +60,7 @@
         row.innerHTML = `
           <td>${store.ivr_code}</td>
           <td>${store.store_name}</td>
-          <td><a href="${store.storele Maps</a></td>
+          <td><a href="${store.store_url}" target="_blank">Google Maps</a></td>
           <td>${store.review_count}</td>
         `;
         table.appendChild(row);
@@ -92,5 +94,3 @@
   </script>
 </body>
 </html>
-<head>
-  <meta charset="UTF-8">
