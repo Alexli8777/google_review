@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>遠傳加盟門市評論工具</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/ull.min.js</script>
-  stores_array_snippet.js</script>
-  <!-- 載入 Google Maps JavaScript API，啟用 Places Library -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe_aYc35K2Mc9OBo97xM&libraries=places</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="stores_array_snippet.js"></script>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
@@ -36,37 +34,24 @@
   </table>
 
   <script>
-    let map;
-    let service;
-
-    function initMap() {
-      // 初始化一個隱藏的地圖，PlacesService 需要 map 物件
-      map = new google.maps.Map(document.createElement('div'));
-      service = new google.maps.places.PlacesService(map);
-    }
+    const apiKey = "AIzaSyAe_aYc35K2Mc9OBUH5BM2EObMfxlo97xM";
 
     async function updateReviews() {
       const tbody = document.getElementById("tableBody");
       tbody.innerHTML = "";
 
       for (const store of stores) {
-        await new Promise((resolve) => {
-          service.getDetails({ placeId: store.placeId, fields: ['user_ratings_total'] }, (result, status) => {
-            let count = "N/A";
-            if (status === google.maps.places.PlacesServiceStatus.OK && result.user_ratings_total !== undefined) {
-              count = result.user_ratings_total;
-            }
+        const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${store.placeId}&fields=user_ratings_total&key=${apiKey}`);
+        const data = await response.json();
+        const count = data.result?.user_ratings_total || "N/A";
 
-            const row = `<tr>
-              <td>${store.ivr}</td>
-              <td>${store.name}</td>
-              <td>${store.mapsUrl}查看地圖</a></td>
-              <td>${count}</td>
-            </tr>`;
-            tbody.innerHTML += row;
-            resolve();
-          });
-        });
+        const row = `<tr>
+          <td>${store.ivr}</td>
+          <td>${store.name}</td>
+          <td><a href="${store.mapsUrl}" target="_blank">查看地圖</a></td>
+          <td>${count}</td>
+        </tr>`;
+        tbody.innerHTML += row;
       }
     }
 
@@ -88,9 +73,6 @@
       XLSX.utils.book_append_sheet(wb, ws, "評論數");
       XLSX.writeFile(wb, "遠傳門市評論數.xlsx");
     }
-
-    // 初始化地圖與 PlacesService
-    window.onload = initMap;
   </script>
 </body>
 </html>
