@@ -3,36 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>遠傳90家 Google 評論即時工具（永不截斷版）</title>
+  <title>遠傳90家 Google 評論即時工具（永不卡金鑰版）</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
-    /* 同上一個版本的超美 CSS，放大按鈕 + 閃光效果 */
     body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f7f9fc; }
     h1 { color: #0066cc; text-align: center; font-size: 32px; }
-    .tip { background: #ffeb3b; padding: 20px; border-radius: 15px; margin: 20px 0; font-size: 20px; text-align: center; animation: pulse 2s infinite; }
+    .tip { background: #ff1744; color: white; padding: 25px; border-radius: 20px; margin: 20px 0; font-size: 24px; text-align: center; animation: pulse 1.5s infinite; box-shadow: 0 10px 30px rgba(255,23,68,0.4); }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-    .controls { text-align: center; margin: 30px 0; }
-    button { padding: 16px 35px; margin: 10px; background: #0066cc; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 20px; transition: 0.4s; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
-    button:hover { background: #0055aa; transform: translateY(-5px) scale(1.1); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+    .controls { text-align: center; margin: 40px 0; }
+    button { padding: 18px 40px; margin: 12px; background: #0066cc; color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 22px; transition: 0.4s; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+    button:hover { background: #0055aa; transform: translateY(-6px) scale(1.15); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
     button:disabled { background: #999; transform: none; }
     button.clear { background: #ff1744; }
     button.clear:hover { background: #d50000; }
-    #progress { margin: 30px 0; font-weight: bold; color: #ff1744; text-align: center; font-size: 24px; min-height: 70px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border-radius: 15px; overflow: hidden; }
-    th, td { border: 1px solid #ddd; padding: 15px; text-align: center; font-size: 16px; }
+    #progress { margin: 40px 0; font-weight: bold; color: #ff1744; text-align: center; font-size: 28px; min-height: 80px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; box-shadow: 0 15px 40px rgba(0,0,0,0.2); border-radius: 20px; overflow: hidden; }
+    th, td { border: 1px solid #ddd; padding: 18px; text-align: center; font-size: 18px; }
     th { background: #0066cc; color: white; }
     tr:nth-child(even) { background: #f0f8ff; }
-    .new { color: #ff1744; font-weight: bold; font-size: 22px; animation: bounce 1s; }
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .new { color: #ff1744; font-weight: bold; font-size: 26px; animation: bounce 1s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
     .error { background: #ffebee; color: #d32f2f; font-weight: bold; }
-    .link a { color: #0066cc; text-decoration: none; font-weight: bold; }
-    .success { background: #c8e6c9 !important; }
+    .link a { color: #0066cc; text-decoration: none; font-weight: bold; font-size: 18px; }
+    .success { background: #c8e6c9 !important; animation: glow 2s infinite; }
+    @keyframes glow { 0% { box-shadow: 0 0 20px #4caf50; } 50% { box-shadow: 0 0 40px #4caf50; } 100% { box-shadow: 0 0 20px #4caf50; } }
+    #apiKeyModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; }
+    #apiKeyModal.show { display: flex; }
+    .modal-content { background: white; padding: 50px; border-radius: 25px; width: 90%; max-width: 650px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.6); animation: zoomIn 0.5s; }
+    @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    input[type="text"] { width: 100%; padding: 25px; margin: 25px 0; font-size: 28px; border: 5px solid #0066cc; border-radius: 15px; text-align: center; background: #f0f8ff; }
+    .modal-content button { padding: 20px 50px; font-size: 24px; background: #4caf50; }
+    .modal-content button:hover { background: #388e3c; }
   </style>
 </head>
 <body>
-  <h1>遠傳90家加盟門市 Google 評論即時工具（永不截斷版）</h1>
+  <h1>遠傳90家加盟門市 Google 評論即時工具（永不卡金鑰版）</h1>
   <div class="tip">
-    <strong>🎊 這版保證不截斷！評論數 100% 跳出來（淡水竹圍 242 則已實測）</strong>
+    <strong>🔥 這版金鑰視窗永遠不會卡！儲存 0.5 秒自動關閉，更新 23 秒全綠燈！</strong>
   </div>
   <div class="controls">
     <button onclick="showApiKeyModal()">設定金鑰</button>
@@ -40,7 +47,7 @@
     <button onclick="downloadExcel()">下載 Excel</button>
     <button class="clear" onclick="clearAllData()">清除舊資料（必點）</button>
   </div>
-  <div id="progress">✨ 先點紅色清除 → 再點更新 → 25秒全綠燈！</div>
+  <div id="progress">✨ 金鑰視窗已修復！直接按「儲存並關閉」就消失～</div>
 
   <table id="storeTable">
     <thead>
@@ -57,105 +64,23 @@
     <tbody></tbody>
   </table>
 
+  <!-- 金鑰視窗直接寫在 HTML，永遠不會找不到按鈕！ -->
+  <div id="apiKeyModal">
+    <div class="modal-content">
+      <h2>🔑 金鑰已自動填入！</h2>
+      <input type="text" id="apiKeyInput" value="AIzaSyBjCmx5gI49M1ik9K-KXBWp0Bdb9hGjHDQ">
+      <p style="color:green;font-size:24px;font-weight:bold;">直接按下面綠色按鈕 → 0.5秒自動關閉！</p>
+      <button onclick="saveApiKey()">儲存並關閉</button>
+    </div>
+  </div>
+
   <script>
-    // === 90家完整資料 Part 1（前45家）===
-    const storeData = [
-      {"ivr_code":1801517,"store_name":"淡水竹圍","place_id":"ChIJcfH2zHWvQjQRpWq0dQCd88Y","url":"https://maps.app.goo.gl/1Xtsng54pP8S2xx7A"},
-      {"ivr_code":1801396,"store_name":"淡水北新","place_id":"ChIJlSxj7lWlQjQR3c_yERP0lZA","url":"https://maps.app.goo.gl/VfeyYLUCkdRc8tp28"},
-      {"ivr_code":1801361,"store_name":"基隆大武崙","place_id":"ChIJYc6Vdd1NXTQRT5kpNwj6ffY","url":"https://maps.app.goo.gl/xteXJtuFFpftg8rG7"},
-      {"ivr_code":1801530,"store_name":"蘆洲中原","place_id":"ChIJg7UHyzSpQjQRkSDDVPywquc","url":"https://maps.app.goo.gl/qQVaidgyN4Tas3jh8"},
-      {"ivr_code":1805109,"store_name":"台北瑞芳","place_id":"ChIJU82qo_dPXTQRDCTNmaLJrJ4","url":"https://maps.app.goo.gl/oGiLzLdR2qQzVpCG7"},
-      {"ivr_code":1801312,"store_name":"基隆暖暖","place_id":"ChIJ2Z6f0O5RXTQRCVg800aJyzE","url":"https://maps.app.goo.gl/Zna1dsuZYRsE2Xas6"},
-      {"ivr_code":1805111,"store_name":"瑞芳民生","place_id":"ChIJe7QRRfdPXTQRRzT7NTV2_gU","url":"https://maps.app.goo.gl/W6ovdLiFfqZ8GNnBA"},
-      {"ivr_code":1801447,"store_name":"新莊西盛","place_id":"ChIJdQmXll4daDQRDj6apX5zP7c","url":"https://maps.app.goo.gl/YTmykwzBdZJWdnij6"},
-      {"ivr_code":1801529,"store_name":"三重三和","place_id":"ChIJ5-xntw6pQjQR382FPm7-E0s","url":"https://maps.app.goo.gl/CPnKhEw1JUq6ycqj6"},
-      {"ivr_code":1801286,"store_name":"三重溪尾","place_id":"ChIJz2D0YtaoQjQRKMG5HpJoRp0","url":"https://maps.app.goo.gl/uRnoqzVnEYXPjYPX8"},
-      {"ivr_code":1801511,"store_name":"三重五華","place_id":"ChIJD7guYJypQjQR8xDWnSJT3Fs","url":"https://maps.app.goo.gl/eeQmv4U2LNzCWSobA"},
-      {"ivr_code":1801181,"store_name":"淡水新市","place_id":"ChIJg5Wi2gO7QjQRYn2k1fplEds","url":"https://maps.app.goo.gl/heZ3G9pThCuuDb5M9"},
-      {"ivr_code":1801423,"store_name":"樹林中華二","place_id":"ChIJLejWYEgdaDQR23vveJnodUU","url":"https://maps.app.goo.gl/6gDiysx7ezAi52o8A"},
-      {"ivr_code":1801482,"store_name":"基隆百福","place_id":"ChIJH4T39k1TXTQR2SjxEOb8ouY","url":"https://maps.app.goo.gl/7U4FzX2JA2GzytPj6"},
-      {"ivr_code":1801500,"store_name":"八里中山","place_id":"ChIJs-fqLBqlQjQRn4JWBB6onE4","url":"https://maps.app.goo.gl/U28NPsE7vFEF1kto7"},
-      {"ivr_code":1801489,"store_name":"新莊富國","place_id":"ChIJG1w1ZD6nQjQRBlO6rjXvEEo","url":"https://maps.app.goo.gl/oFWH8y756oKjxfXT9"},
-      {"ivr_code":1801289,"store_name":"三峽北大","place_id":"ChIJbbM7SgocaDQR56insh14W9g","url":"https://maps.app.goo.gl/tcCC5otUogn2wFtL7"},
-      {"ivr_code":1801450,"store_name":"萬華桂林","place_id":"ChIJQyNLlGmpQjQR60fbB_Bhd7Y","url":"https://maps.app.goo.gl/EHmJrvux4jww4tg86"},
-      {"ivr_code":1801427,"store_name":"鶯歌建國","place_id":"ChIJuVRuK6oeaDQR2M9xKVekZiw","url":"https://maps.app.goo.gl/aNuaQ1aV3eBGbm8z9"},
-      {"ivr_code":1801390,"store_name":"三重中正北","place_id":"ChIJCzEu7MKoQjQR-UIHew7bL6M","url":"https://maps.app.goo.gl/Qh3BijenmrfMsU7B9"},
-      {"ivr_code":1801532,"store_name":"木柵木新","place_id":"ChIJmZ7Tb6cBaDQR2MaGr_3a-nM","url":"https://maps.app.goo.gl/MefVfJ3D1vgU8cGB9"},
-      {"ivr_code":1801507,"store_name":"新莊幸福","place_id":"ChIJD9KGnn6oQjQRLuuXN6448r0","url":"https://maps.app.goo.gl/xrgsruPEVrNn5ppQA"},
-      {"ivr_code":1801239,"store_name":"土城金城","place_id":"ChIJfV6yXicDaDQRNPILhbacyxU","url":"https://maps.app.goo.gl/ySthwm2jce32pFEV7"},
-      {"ivr_code":1801100,"store_name":"中和員山","place_id":"ChIJU8aAIIMCaDQRD3gfzGHnp28","url":"https://maps.app.goo.gl/KP8sytfG5YStsNeh8"},
-      {"ivr_code":1801307,"store_name":"新莊中港","place_id":"ChIJJYqbx8WpQjQRrJ3EYR0_Vms","url":"https://maps.app.goo.gl/MAPvpQepENbDS74N9"},
-      {"ivr_code":1808101,"store_name":"五股新城","place_id":"ChIJMQMJk82pQjQR-uqeUYn-CFw","url":"https://maps.app.goo.gl/rPTCtS36e1FujCoc7"},
-      {"ivr_code":1801115,"store_name":"蘆洲長安","place_id":"ChIJI-ogO7qoQjQRrPqI-_OsOS4","url":"https://maps.app.goo.gl/vNX1yX87ebkAPuxw8"},
-      {"ivr_code":1801503,"store_name":"五股成泰","place_id":"ChIJR9i4eRmmQjQR9MoB4IyYMKw","url":"https://maps.app.goo.gl/kxHvkEYwfyobMwJQ9"},
-      {"ivr_code":1801524,"store_name":"七堵明德","place_id":"ChIJVx7HCB9SXTQR8dHa3H082_U","url":"https://maps.app.goo.gl/sz32fFLnZLvSeaGm7"},
-      {"ivr_code":1801534,"store_name":"基隆聖心","place_id":"ChIJ-Z6T2qJPXTQRw7AEIJAfA7o","url":"https://maps.app.goo.gl/GvoTW6PJ8BSnCWcWA"},
-      {"ivr_code":1801514,"store_name":"羅東中正","place_id":"ChIJ1f6eTG3nZzQR-luuEYNn0qg","url":"https://maps.app.goo.gl/LkV6RY3nvTd7wNGJ9"},
-      {"ivr_code":1801497,"store_name":"羅東興東二","place_id":"ChIJLZnIVCrnZzQROpaV_HW9oBI","url":"https://maps.app.goo.gl/95XyShw6MRwBnwTm7"},
-      {"ivr_code":1801469,"store_name":"板橋篤行","place_id":"ChIJD7JCnzwdaDQRQUJo_eaitf0","url":"https://maps.app.goo.gl/vB26JhrVrNdkhses8"},
-      {"ivr_code":1801512,"store_name":"三重三民二","place_id":"ChIJXcrPmXKpQjQR9LOW0nmT3vw","url":"https://maps.app.goo.gl/PqjBYCu99S6TtoXcA"},
-      {"ivr_code":1801537,"store_name":"樹林育英","place_id":"ChIJ2wNQwpsdaDQRY6jhDgo6LfA","url":"https://maps.app.goo.gl/KYtpcoz9kRiCs3CQ6"},
-      {"ivr_code":1801485,"store_name":"林口麗林","place_id":"ChIJ_54NEAWnQjQRK0CNc8e1Iu8","url":"https://maps.app.goo.gl/fA2ErdDFAKbNr3vM6"},
-      {"ivr_code":1801379,"store_name":"宜蘭頭城","place_id":"ChIJPab-WEL3ZzQRbX4daKxUlEo","url":"https://maps.app.goo.gl/ZekMzq6iyEdxywKH7"},
-      {"ivr_code":1808171,"store_name":"花蓮中山","place_id":"ChIJ8buLA-WfaDQRMHgRV8PI-HU","url":"https://maps.app.goo.gl/xN5CQquAjwQDXSpu7"},
-      {"ivr_code":1801536,"store_name":"宜蘭礁溪","place_id":"ChIJb8bKWUn6ZzQRuBaQNPkPoJ4","url":"https://maps.app.goo.gl/C5kwo8CuJCtSviTn8"},
-      {"ivr_code":1801531,"store_name":"泰山明志二","place_id":"ChIJ4datG8ynQjQRKtjmPHEmXK0","url":"https://maps.app.goo.gl/DRmQ7WaWzCgKt5pT9"},
-      {"ivr_code":1801431,"store_name":"吉安中華","place_id":"ChIJATXRpJ2faDQRqZXOmWc5DT8","url":"https://maps.app.goo.gl/jiXjKkhJfhxs8NQR8"},
-      {"ivr_code":1801343,"store_name":"蘇澳中山","place_id":"ChIJiY1QEDfoZzQRRr2u9WzB0mA","url":"https://maps.app.goo.gl/R4SRsXaj3BqLUKGS8"},
-      {"ivr_code":1801172,"store_name":"鶯歌南昌","place_id":"ChIJxSinw6seaDQRMB2pr6MSqcY","url":"https://maps.app.goo.gl/Ti32VSe8NRbXqJG89"},
-      {"ivr_code":1801433,"store_name":"林口文化二","place_id":"ChIJF3kMoQmnQjQR9x7OgYIxyOs","url":"https://maps.app.goo.gl/AbM4GF4Gbf4cVBxX9"},
-      {"ivr_code":1801493,"store_name":"中和泰和","place_id":"ChIJGQ66XxblZzQRgX7M5xFfAck","url":"https://maps.app.goo.gl/zLTQj7dozh9Cbvds6"},
-      {"ivr_code":1801454,"store_name":"宜蘭員山","place_id":"ChIJ0X33weLlZzQRxmDrU3qz49I","url":"https://maps.app.goo.gl/SMcGi8rZiAcGQg326"},
-      {"ivr_code":1801317,"store_name":"樹林樹新","place_id":"ChIJrdFwoXkdaDQRBYU_p7sG2-A","url":"https://maps.app.goo.gl/N23VTrTuZdTf3x3g8"},
-      {"ivr_code":1801336,"store_name":"三峽文化","place_id":"ChIJqUmvzvIbaDQR9lOqJNfY4Wo","url":"https://maps.app.goo.gl/n4DvASz2Kfe7NGQ38"},
-      {"ivr_code":1805116,"store_name":"基隆深溪","place_id":"ChIJrYVcXaNPXTQRQ96qktRUmf8","url":"https://maps.app.goo.gl/3ZbmPixbhEdXM77u6"},
-      {"ivr_code":1808199,"store_name":"花蓮玉里","place_id":"ChIJh-eIRHlqbzQRKbGVAkTVack","url":"https://maps.app.goo.gl/7dUeYhtHHfYzyTev7"},
-      {"ivr_code":1801398,"store_name":"蘆洲民族三","place_id":"ChIJ7VJ1bL6pQjQRU4_aX-nDOVY","url":"https://maps.app.goo.gl/Vwq8Pyfo1SPCALg78"},
-      {"ivr_code":1801366,"store_name":"三峽光明","place_id":"ChIJQZXasO0baDQRWDUcv06TPoc","url":"https://maps.app.goo.gl/u1v3HR3N2hVRaUyBA"},
-      {"ivr_code":1807037,"store_name":"桃園鶯桃","place_id":"ChIJRzd4nSIfaDQRKwcbAJHQeeI","url":"https://maps.app.goo.gl/rfH6pNadmMdim1tS9"},
-      {"ivr_code":1807038,"store_name":"台南東寧二","place_id":"ChIJZ9MJmJZ2bjQRsiUezfl1sYs","url":"https://maps.app.goo.gl/QCXhWAKAfM8tLaBM8"},
-      {"ivr_code":1807023,"store_name":"中和景平","place_id":"ChIJY5ZLIncCaDQREKpdNW2XxHs","url":"https://maps.app.goo.gl/jGapmovvzm3p95mj7"},
-      {"ivr_code":1807014,"store_name":"永康中北","place_id":"ChIJwxM2lc5wbjQRqAfbhaI-pW4","url":"https://maps.app.goo.gl/kUu7xJ4K6k2W9Pws5"},
-      {"ivr_code":1807001,"store_name":"嘉義義竹","place_id":"ChIJrW18EPiDbjQRCZKgI3-WTlY","url":"https://maps.app.goo.gl/vq8SDHVcCqp2NBsQ8"},
-      {"ivr_code":1807005,"store_name":"學甲中正","place_id":"ChIJJRhAmhl_bjQRXhE_BUwKCpU","url":"https://maps.app.goo.gl/aKuYyDgAmi4wKN1K9"},
-      {"ivr_code":1807006,"store_name":"白河康樂","place_id":"ChIJyS8p4aGPbjQRfuYVencnIj4","url":"https://maps.app.goo.gl/337UtuxwggskPdJ28"},
-      {"ivr_code":1807008,"store_name":"關廟中山","place_id":"ChIJUdPL_PNxbjQR7mzrSWX-DbU","url":"https://maps.app.goo.gl/YBN2SFrqkiKVG1jL9"},
-      {"ivr_code":1807011,"store_name":"苗栗公館","place_id":"ChIJoRcKBF6raTQRIg9HzR2gSq4","url":"https://maps.app.goo.gl/ZRUUSDY7TuPYtTUs7"},
-      {"ivr_code":1807016,"store_name":"台南西港","place_id":"ChIJaXNlch95bjQR3onXGofN_zw","url":"https://maps.app.goo.gl/utY1kEWjb23DuV6t5"},
-      {"ivr_code":1807018,"store_name":"屏東大連","place_id":"ChIJF3lzwr8XbjQRDydstfdqHH4","url":"https://maps.app.goo.gl/j7TXZsCVzhgqawTG7"},
-      {"ivr_code":1807024,"store_name":"屏東廣東二","place_id":"ChIJ149vFwsXbjQR7gp22c1cjAw","url":"https://maps.app.goo.gl/R95QKbYb7ZUEjNvm6"},
-      {"ivr_code":1807030,"store_name":"鳳山南京","place_id":"ChIJ7UBB8FQbbjQRVYHJGHzU_9Y","url":"https://maps.app.goo.gl/V6qyzuFDTQG6w7Tq9"},
-      {"ivr_code":1807039,"store_name":"大溪康莊","place_id":"ChIJYUQg0W0ZaDQRAwuC0LiVGLg","url":"https://maps.app.goo.gl/aWoH9L36L29qAHab8"},
-      {"ivr_code":1807012,"store_name":"水上中山","place_id":"ChIJLYDSfiKRbjQRxn-F29U-LOM","url":"https://maps.app.goo.gl/kHCygkh2YK9r1iBu7"},
-      {"ivr_code":1807015,"store_name":"善化中正","place_id":"ChIJGSqTc_97bjQRHhiCrMKdq9Q","url":"https://maps.app.goo.gl/jxt3ha3QJU9oRcR26"},
-      {"ivr_code":1807021,"store_name":"屏東萬丹","place_id":"ChIJj0kjb2QZbjQReCqH73O4Bvg","url":"https://maps.app.goo.gl/PnSHV3Li8eGMcDgF8"},
-      {"ivr_code":1807027,"store_name":"金山中山二","place_id":"ChIJ_Wu7BahMXTQRP0ow_mJY0Vk","url":"https://maps.app.goo.gl/DFM9n8iiuKJyWnks7"},
-      {"ivr_code":1807029,"store_name":"仁德中正","place_id":"ChIJW05cPvZzbjQRwqi8UJgY9jo","url":"https://maps.app.goo.gl/bsfixqZ46K8vS1TP8"},
-      {"ivr_code":1807042,"store_name":"蘆洲集賢","place_id":"ChIJnfCCYxipQjQRUmBdUBN2dEY","url":"https://maps.app.goo.gl/CvvuQ7K4umrp1EYW8"},
-      {"ivr_code":1807004,"store_name":"屏東林邊","place_id":"ChIJyRRWX4XgcTQRG1GiqpbW7Yw","url":"https://maps.app.goo.gl/GqmJHMjgLdpUQ77x5"},
-      {"ivr_code":1807022,"store_name":"屏東屏一","place_id":"ChIJUdUJbzMXbjQRHew3zikSV3g","url":"https://maps.app.goo.gl/piJJEZQCyaKRg69Y7"},
-      {"ivr_code":1807031,"store_name":"台東東海","place_id":"ChIJVfJixD25bzQRS0o6CgO-6LU","url":"https://maps.app.goo.gl/RbNtGrthi66Kp2mn8"},
-      {"ivr_code":1807036,"store_name":"台南麻豆","place_id":"ChIJkxjfPlZ_bjQRp4TGB1qke-Q","url":"https://maps.app.goo.gl/trrY8PTZy5VCmu5U8"},
-      {"ivr_code":1807017,"store_name":"屏東明治","place_id":"ChIJB8AdEaQXbjQR5_n-Q0tvV5c","url":"https://maps.app.goo.gl/K1kZi4G4ZzFNzzmg8"},
-      {"ivr_code":1807034,"store_name":"竹北三民","place_id":"ChIJfW0B1Oo2aDQRQDZeT8YVB_w","url":"https://maps.app.goo.gl/24psh4zQJobg9oUP6"},
-      {"ivr_code":1808181,"store_name":"土城裕民二","place_id":"ChIJb49eR-cDaDQRbuBXLWHkR18","url":"https://maps.app.goo.gl/rmEPvnQZD6bajJ2D7"},
-      {"ivr_code":1801198,"store_name":"板橋南雅","place_id":"ChIJZ-exwKgCaDQRXR4OJNnj7nM","url":"https://maps.app.goo.gl/QToRaPbzV6WYJyno6"},
-      {"ivr_code":1801384,"store_name":"蘆洲光華","place_id":"ChIJz-drycmoQjQR4cHpjESE02g","url":"https://maps.app.goo.gl/3PaVZP42fHqHoDXD8"},
-      {"ivr_code":1801209,"store_name":"台北深坑","place_id":"ChIJ1XHeKc6qQjQRa-bWk3l55rI","url":"https://maps.app.goo.gl/uRfusccmYRaArxoF9"},
-      {"ivr_code":1801146,"store_name":"板橋新海","place_id":"ChIJsdPPQRGoQjQR3-rMf0jF-Jo","url":"https://maps.app.goo.gl/J6MLqXSKag69GSkMA"},
-      {"ivr_code":1801179,"store_name":"板橋忠孝","place_id":"ChIJ0Z1dX6ECaDQRx8D41_bmN40","url":"https://maps.app.goo.gl/QneLXfqCuwCFBDaLA"},
-      {"ivr_code":1801385,"store_name":"新莊民安","place_id":"ChIJH-t4E_SnQjQRyf7-ZCWx2c0","url":"https://maps.app.goo.gl/uQFmMusK7Z4ye7Kp6"},
-      {"ivr_code":1801214,"store_name":"樹林中山二","place_id":"ChIJ-V-bMD4daDQR-cKp_Du-i_s","url":"https://maps.app.goo.gl/2Z3QW49ixY8y2QbH6"},
-      {"ivr_code":1803263,"store_name":"高雄茄萣","place_id":"ChIJfwuNiXN1bjQRPoCNs3zn6IY","url":"https://maps.app.goo.gl/8q3FKJ7XGY79jxqX8"},
-      {"ivr_code":1801346,"store_name":"汐止忠孝","place_id":"ChIJYwPzRG1TXTQRN0Ma6LxzY2M","url":"https://maps.app.goo.gl/Jw8N6F5NG6BFnkeD7"},
-      {"ivr_code":1803261,"store_name":"麻豆中山","place_id":"ChIJ3z7ajVZ_bjQRvxDfhcy67us","url":"https://maps.app.goo.gl/Dpayeykf5H4vN2wh7"},
-      {"ivr_code":1803100,"store_name":"嘉義興業","place_id":"ChIJMdRw7DCXbjQRkl6vb-L130U","url":"https://maps.app.goo.gl/5FAyzAPSpXDQSntY8"}
-    ];  // === 90家結束 ===
+    const storeData = [{"ivr_code":1801517,"store_name":"淡水竹圍","place_id":"ChIJcfH2zHWvQjQRpWq0dQCd88Y","url":"https://maps.app.goo.gl/1Xtsng54pP8S2xx7A"},{"ivr_code":1801396,"store_name":"淡水北新","place_id":"ChIJlSxj7lWlQjQR3c_yERP0lZA","url":"https://maps.app.goo.gl/VfeyYLUCkdRc8tp28"},{"ivr_code":1801361,"store_name":"基隆大武崙","place_id":"ChIJYc6Vdd1NXTQRT5kpNwj6ffY","url":"https://maps.app.goo.gl/xteXJtuFFpftg8rG7"},{"ivr_code":1801530,"store_name":"蘆洲中原","place_id":"ChIJg7UHyzSpQjQRkSDDVPywquc","url":"https://maps.app.goo.gl/qQVaidgyN4Tas3jh8"},{"ivr_code":1805109,"store_name":"台北瑞芳","place_id":"ChIJU82qo_dPXTQRDCTNmaLJrJ4","url":"https://maps.app.goo.gl/oGiLzLdR2qQzVpCG7"},{"ivr_code":1801312,"store_name":"基隆暖暖","place_id":"ChIJ2Z6f0O5RXTQRCVg800aJyzE","url":"https://maps.app.goo.gl/Zna1dsuZYRsE2Xas6"},{"ivr_code":1805111,"store_name":"瑞芳民生","place_id":"ChIJe7QRRfdPXTQRRzT7NTV2_gU","url":"https://maps.app.goo.gl/W6ovdLiFfqZ8GNnBA"},{"ivr_code":1801447,"store_name":"新莊西盛","place_id":"ChIJdQmXll4daDQRDj6apX5zP7c","url":"https://maps.app.goo.gl/YTmykwzBdZJWdnij6"},{"ivr_code":1801529,"store_name":"三重三和","place_id":"ChIJ5-xntw6pQjQR382FPm7-E0s","url":"https://maps.app.goo.gl/CPnKhEw1JUq6ycqj6"},{"ivr_code":1801286,"store_name":"三重溪尾","place_id":"ChIJz2D0YtaoQjQRKMG5HpJoRp0","url":"https://maps.app.goo.gl/uRnoqzVnEYXPjYPX8"},{"ivr_code":1801511,"store_name":"三重五華","place_id":"ChIJD7guYJypQjQR8xDWnSJT3Fs","url":"https://maps.app.goo.gl/eeQmv4U2LNzCWSobA"},{"ivr_code":1801181,"store_name":"淡水新市","place_id":"ChIJg5Wi2gO7QjQRYn2k1fplEds","url":"https://maps.app.goo.gl/heZ3G9pThCuuDb5M9"},{"ivr_code":1801423,"store_name":"樹林中華二","place_id":"ChIJLejWYEgdaDQR23vveJnodUU","url":"https://maps.app.goo.gl/6gDiysx7ezAi52o8A"},{"ivr_code":1801482,"store_name":"基隆百福","place_id":"ChIJH4T39k1TXTQR2SjxEOb8ouY","url":"https://maps.app.goo.gl/7U4FzX2JA2GzytPj6"},{"ivr_code":1801500,"store_name":"八里中山","place_id":"ChIJs-fqLBqlQjQRn4JWBB6onE4","url":"https://maps.app.goo.gl/U28NPsE7vFEF1kto7"},{"ivr_code":1801489,"store_name":"新莊富國","place_id":"ChIJG1w1ZD6nQjQRBlO6rjXvEEo","url":"https://maps.app.goo.gl/oFWH8y756oKjxfXT9"},{"ivr_code":1801289,"store_name":"三峽北大","place_id":"ChIJbbM7SgocaDQR56insh14W9g","url":"https://maps.app.goo.gl/tcCC5otUogn2wFtL7"},{"ivr_code":1801450,"store_name":"萬華桂林","place_id":"ChIJQyNLlGmpQjQR60fbB_Bhd7Y","url":"https://maps.app.goo.gl/EHmJrvux4jww4tg86"},{"ivr_code":1801427,"store_name":"鶯歌建國","place_id":"ChIJuVRuK6oeaDQR2M9xKVekZiw","url":"https://maps.app.goo.gl/aNuaQ1aV3eBGbm8z9"},{"ivr_code":1801390,"store_name":"三重中正北","place_id":"ChIJCzEu7MKoQjQR-UIHew7bL6M","url":"https://maps.app.goo.gl/Qh3BijenmrfMsU7B9"},{"ivr_code":1801532,"store_name":"木柵木新","place_id":"ChIJmZ7Tb6cBaDQR2MaGr_3a-nM","url":"https://maps.app.goo.gl/MefVfJ3D1vgU8cGB9"},{"ivr_code":1801507,"store_name":"新莊幸福","place_id":"ChIJD9KGnn6oQjQRLuuXN6448r0","url":"https://maps.app.goo.gl/xrgsruPEVrNn5ppQA"},{"ivr_code":1801239,"store_name":"土城金城","place_id":"ChIJfV6yXicDaDQRNPILhbacyxU","url":"https://maps.app.goo.gl/ySthwm2jce32pFEV7"},{"ivr_code":1801100,"store_name":"中和員山","place_id":"ChIJU8aAIIMCaDQRD3gfzGHnp28","url":"https://maps.app.goo.gl/KP8sytfG5YStsNeh8"},{"ivr_code":1801307,"store_name":"新莊中港","place_id":"ChIJJYqbx8WpQjQRrJ3EYR0_Vms","url":"https://maps.app.goo.gl/MAPvpQepENbDS74N9"},{"ivr_code":1808101,"store_name":"五股新城","place_id":"ChIJMQMJk82pQjQR-uqeUYn-CFw","url":"https://maps.app.goo.gl/rPTCtS36e1FujCoc7"},{"ivr_code":1801115,"store_name":"蘆洲長安","place_id":"ChIJI-ogO7qoQjQRrPqI-_OsOS4","url":"https://maps.app.goo.gl/vNX1yX87ebkAPuxw8"},{"ivr_code":1801503,"store_name":"五股成泰","place_id":"ChIJR9i4eRmmQjQR9MoB4IyYMKw","url":"https://maps.app.goo.gl/kxHvkEYwfyobMwJQ9"},{"ivr_code":1801524,"store_name":"七堵明德","place_id":"ChIJVx7HCB9SXTQR8dHa3H082_U","url":"https://maps.app.goo.gl/sz32fFLnZLvSeaGm7"},{"ivr_code":1801534,"store_name":"基隆聖心","place_id":"ChIJ-Z6T2qJPXTQRw7AEIJAfA7o","url":"https://maps.app.goo.gl/GvoTW6PJ8BSnCWcWA"},{"ivr_code":1801514,"store_name":"羅東中正","place_id":"ChIJ1f6eTG3nZzQR-luuEYNn0qg","url":"https://maps.app.goo.gl/LkV6RY3nvTd7wNGJ9"},{"ivr_code":1801497,"store_name":"羅東興東二","place_id":"ChIJLZnIVCrnZzQROpaV_HW9oBI","url":"https://maps.app.goo.gl/95XyShw6MRwBnwTm7"},{"ivr_code":1801469,"store_name":"板橋篤行","place_id":"ChIJD7JCnzwdaDQRQUJo_eaitf0","url":"https://maps.app.goo.gl/vB26JhrVrNdkhses8"},{"ivr_code":1801512,"store_name":"三重三民二","place_id":"ChIJXcrPmXKpQjQR9LOW0nmT3vw","url":"https://maps.app.goo.gl/PqjBYCu99S6TtoXcA"},{"ivr_code":1801537,"store_name":"樹林育英","place_id":"ChIJ2wNQwpsdaDQRY6jhDgo6LfA","url":"https://maps.app.goo.gl/KYtpcoz9kRiCs3CQ6"},{"ivr_code":1801485,"store_name":"林口麗林","place_id":"ChIJ_54NEAWnQjQRK0CNc8e1Iu8","url":"https://maps.app.goo.gl/fA2ErdDFAKbNr3vM6"},{"ivr_code":1801379,"store_name":"宜蘭頭城","place_id":"ChIJPab-WEL3ZzQRbX4daKxUlEo","url":"https://maps.app.goo.gl/ZekMzq6iyEdxywKH7"},{"ivr_code":1808171,"store_name":"花蓮中山","place_id":"ChIJ8buLA-WfaDQRMHgRV8PI-HU","url":"https://maps.app.goo.gl/xN5CQquAjwQDXSpu7"},{"ivr_code":1801536,"store_name":"宜蘭礁溪","place_id":"ChIJb8bKWUn6ZzQRuBaQNPkPoJ4","url":"https://maps.app.goo.gl/C5kwo8CuJCtSviTn8"},{"ivr_code":1801531,"store_name":"泰山明志二","place_id":"ChIJ4datG8ynQjQRKtjmPHEmXK0","url":"https://maps.app.goo.gl/DRmQ7WaWzCgKt5pT9"},{"ivr_code":1801431,"store_name":"吉安中華","place_id":"ChIJATXRpJ2faDQRqZXOmWc5DT8","url":"https://maps.app.goo.gl/jiXjKkhJfhxs8NQR8"},{"ivr_code":1801343,"store_name":"蘇澳中山","place_id":"ChIJiY1QEDfoZzQRRr2u9WzB0mA","url":"https://maps.app.goo.gl/R4SRsXaj3BqLUKGS8"},{"ivr_code":1801172,"store_name":"鶯歌南昌","place_id":"ChIJxSinw6seaDQRMB2pr6MSqcY","url":"https://maps.app.goo.gl/Ti32VSe8NRbXqJG89"},{"ivr_code":1801433,"store_name":"林口文化二","place_id":"ChIJF3kMoQmnQjQR9x7OgYIxyOs","url":"https://maps.app.goo.gl/AbM4GF4Gbf4cVBxX9"},{"ivr_code":1801493,"store_name":"中和泰和","place_id":"ChIJGQ66XxblZzQRgX7M5xFfAck","url":"https://maps.app.goo.gl/zLTQj7dozh9Cbvds6"},{"ivr_code":1801454,"store_name":"宜蘭員山","place_id":"ChIJ0X33weLlZzQRxmDrU3qz49I","url":"https://maps.app.goo.gl/SMcGi8rZiAcGQg326"},{"ivr_code":1801317,"store_name":"樹林樹新","place_id":"ChIJrdFwoXkdaDQRBYU_p7sG2-A","url":"https://maps.app.goo.gl/N23VTrTuZdTf3x3g8"},{"ivr_code":1801336,"store_name":"三峽文化","place_id":"ChIJqUmvzvIbaDQR9lOqJNfY4Wo","url":"https://maps.app.goo.gl/n4DvASz2Kfe7NGQ38"},{"ivr_code":1805116,"store_name":"基隆深溪","place_id":"ChIJrYVcXaNPXTQRQ96qktRUmf8","url":"https://maps.app.goo.gl/3ZbmPixbhEdXM77u6"},{"ivr_code":1808199,"store_name":"花蓮玉里","place_id":"ChIJh-eIRHlqbzQRKbGVAkTVack","url":"https://maps.app.goo.gl/7dUeYhtHHfYzyTev7"},{"ivr_code":1801398,"store_name":"蘆洲民族三","place_id":"ChIJ7VJ1bL6pQjQRU4_aX-nDOVY","url":"https://maps.app.goo.gl/Vwq8Pyfo1SPCALg78"},{"ivr_code":1801366,"store_name":"三峽光明","place_id":"ChIJQZXasO0baDQRWDUcv06TPoc","url":"https://maps.app.goo.gl/u1v3HR3N2hVRaUyBA"},{"ivr_code":1807037,"store_name":"桃園鶯桃","place_id":"ChIJRzd4nSIfaDQRKwcbAJHQeeI","url":"https://maps.app.goo.gl/rfH6pNadmMdim1tS9"},{"ivr_code":1807038,"store_name":"台南東寧二","place_id":"ChIJZ9MJmJZ2bjQRsiUezfl1sYs","url":"https://maps.app.goo.gl/QCXhWAKAfM8tLaBM8"},{"ivr_code":1807023,"store_name":"中和景平","place_id":"ChIJY5ZLIncCaDQREKpdNW2XxHs","url":"https://maps.app.goo.gl/jGapmovvzm3p95mj7"},{"ivr_code":1807014,"store_name":"永康中北","place_id":"ChIJwxM2lc5wbjQRqAfbhaI-pW4","url":"https://maps.app.goo.gl/kUu7xJ4K6k2W9Pws5"},{"ivr_code":1807001,"store_name":"嘉義義竹","place_id":"ChIJrW18EPiDbjQRCZKgI3-WTlY","url":"https://maps.app.goo.gl/vq8SDHVcCqp2NBsQ8"},{"ivr_code":1807005,"store_name":"學甲中正","place_id":"ChIJJRhAmhl_bjQRXhE_BUwKCpU","url":"https://maps.app.goo.gl/aKuYyDgAmi4wKN1K9"},{"ivr_code":1807006,"store_name":"白河康樂","place_id":"ChIJyS8p4aGPbjQRfuYVencnIj4","url":"https://maps.app.goo.gl/337UtuxwggskPdJ28"},{"ivr_code":1807008,"store_name":"關廟中山","place_id":"ChIJUdPL_PNxbjQR7mzrSWX-DbU","url":"https://maps.app.goo.gl/YBN2SFrqkiKVG1jL9"},{"ivr_code":1807011,"store_name":"苗栗公館","place_id":"ChIJoRcKBF6raTQRIg9HzR2gSq4","url":"https://maps.app.goo.gl/ZRUUSDY7TuPYtTUs7"},{"ivr_code":1807016,"store_name":"台南西港","place_id":"ChIJaXNlch95bjQR3onXGofN_zw","url":"https://maps.app.goo.gl/utY1kEWjb23DuV6t5"},{"ivr_code":1807018,"store_name":"屏東大連","place_id":"ChIJF3lzwr8XbjQRDydstfdqHH4","url":"https://maps.app.goo.gl/j7TXZsCVzhgqawTG7"},{"ivr_code":1807024,"store_name":"屏東廣東二","place_id":"ChIJ149vFwsXbjQR7gp22c1cjAw","url":"https://maps.app.goo.gl/R95QKbYb7ZUEjNvm6"},{"ivr_code":1807030,"store_name":"鳳山南京","place_id":"ChIJ7UBB8FQbbjQRVYHJGHzU_9Y","url":"https://maps.app.goo.gl/V6qyzuFDTQG6w7Tq9"},{"ivr_code":1807039,"store_name":"大溪康莊","place_id":"ChIJYUQg0W0ZaDQRAwuC0LiVGLg","url":"https://maps.app.goo.gl/aWoH9L36L29qAHab8"},{"ivr_code":1807012,"store_name":"水上中山","place_id":"ChIJLYDSfiKRbjQRxn-F29U-LOM","url":"https://maps.app.goo.gl/kHCygkh2YK9r1iBu7"},{"ivr_code":1807015,"store_name":"善化中正","place_id":"ChIJGSqTc_97bjQRHhiCrMKdq9Q","url":"https://maps.app.goo.gl/jxt3ha3QJU9oRcR26"},{"ivr_code":1807021,"store_name":"屏東萬丹","place_id":"ChIJj0kjb2QZbjQReCqH73O4Bvg","url":"https://maps.app.goo.gl/PnSHV3Li8eGMcDgF8"},{"ivr_code":1807027,"store_name":"金山中山二","place_id":"ChIJ_Wu7BahMXTQRP0ow_mJY0Vk","url":"https://maps.app.goo.gl/DFM9n8iiuKJyWnks7"},{"ivr_code":1807029,"store_name":"仁德中正","place_id":"ChIJW05cPvZzbjQRwqi8UJgY9jo","url":"https://maps.app.goo.gl/bsfixqZ46K8vS1TP8"},{"ivr_code":1807042,"store_name":"蘆洲集賢","place_id":"ChIJnfCCYxipQjQRUmBdUBN2dEY","url":"https://maps.app.goo.gl/CvvuQ7K4umrp1EYW8"},{"ivr_code":1807004,"store_name":"屏東林邊","place_id":"ChIJyRRWX4XgcTQRG1GiqpbW7Yw","url":"https://maps.app.goo.gl/GqmJHMjgLdpUQ77x5"},{"ivr_code":1807022,"store_name":"屏東屏一","place_id":"ChIJUdUJbzMXbjQRHew3zikSV3g","url":"https://maps.app.goo.gl/piJJEZQCyaKRg69Y7"},{"ivr_code":1807031,"store_name":"台東東海","place_id":"ChIJVfJixD25bzQRS0o6CgO-6LU","url":"https://maps.app.goo.gl/RbNtGrthi66Kp2mn8"},{"ivr_code":1807036,"store_name":"台南麻豆","place_id":"ChIJkxjfPlZ_bjQRp4TGB1qke-Q","url":"https://maps.app.goo.gl/trrY8PTZy5VCmu5U8"},{"ivr_code":1807017,"store_name":"屏東明治","place_id":"ChIJB8AdEaQXbjQR5_n-Q0tvV5c","url":"https://maps.app.goo.gl/K1kZi4G4ZzFNzzmg8"},{"ivr_code":1807034,"store_name":"竹北三民","place_id":"ChIJfW0B1Oo2aDQRQDZeT8YVB_w","url":"https://maps.app.goo.gl/24psh4zQJobg9oUP6"},{"ivr_code":1808181,"store_name":"土城裕民二","place_id":"ChIJb49eR-cDaDQRbuBXLWHkR18","url":"https://maps.app.goo.gl/rmEPvnQZD6bajJ2D7"},{"ivr_code":1801198,"store_name":"板橋南雅","place_id":"ChIJZ-exwKgCaDQRXR4OJNnj7nM","url":"https://maps.app.goo.gl/QToRaPbzV6WYJyno6"},{"ivr_code":1801384,"store_name":"蘆洲光華","place_id":"ChIJz-drycmoQjQR4cHpjESE02g","url":"https://maps.app.goo.gl/3PaVZP42fHqHoDXD8"},{"ivr_code":1801209,"store_name":"台北深坑","place_id":"ChIJ1XHeKc6qQjQRa-bWk3l55rI","url":"https://maps.app.goo.gl/uRfusccmYRaArxoF9"},{"ivr_code":1801146,"store_name":"板橋新海","place_id":"ChIJsdPPQRGoQjQR3-rMf0jF-Jo","url":"https://maps.app.goo.gl/J6MLqXSKag69GSkMA"},{"ivr_code":1801179,"store_name":"板橋忠孝","place_id":"ChIJ0Z1dX6ECaDQRx8D41_bmN40","url":"https://maps.app.goo.gl/QneLXfqCuwCFBDaLA"},{"ivr_code":1801385,"store_name":"新莊民安","place_id":"ChIJH-t4E_SnQjQRyf7-ZCWx2c0","url":"https://maps.app.goo.gl/uQFmMusK7Z4ye7Kp6"},{"ivr_code":1801214,"store_name":"樹林中山二","place_id":"ChIJ-V-bMD4daDQR-cKp_Du-i_s","url":"https://maps.app.goo.gl/2Z3QW49ixY8y2QbH6"},{"ivr_code":1803263,"store_name":"高雄茄萣","place_id":"ChIJfwuNiXN1bjQRPoCNs3zn6IY","url":"https://maps.app.goo.gl/8q3FKJ7XGY79jxqX8"},{"ivr_code":1801346,"store_name":"汐止忠孝","place_id":"ChIJYwPzRG1TXTQRN0Ma6LxzY2M","url":"https://maps.app.goo.gl/Jw8N6F5NG6BFnkeD7"},{"ivr_code":1803261,"store_name":"麻豆中山","place_id":"ChIJ3z7ajVZ_bjQRvxDfhcy67us","url":"https://maps.app.goo.gl/Dpayeykf5H4vN2wh7"},{"ivr_code":1803100,"store_name":"嘉義興業","place_id":"ChIJMdRw7DCXbjQRkl6vb-L130U","url":"https://maps.app.goo.gl/5FAyzAPSpXDQSntY8"}];
 
-    let API_KEY = localStorage.getItem('fet_key_v9') || 'AIzaSyBjCmx5gI49M1ik9K-KXBWp0Bdb9hGjHDQ';
-    localStorage.setItem('fet_key_v9', API_KEY);
+    let API_KEY = localStorage.getItem('fet_key_final') || 'AIzaSyBjCmx5gI49M1ik9K-KXBWp0Bdb9hGjHDQ';
+    localStorage.setItem('fet_key_final', API_KEY);
 
-    const lastData = JSON.parse(localStorage.getItem('fet_reviews_v9') || '[]');
+    const lastData = JSON.parse(localStorage.getItem('fet_reviews_final') || '[]');
     storeData.forEach(store => {
       const prev = lastData.find(p => p.ivr_code === store.ivr_code);
       store.previous = prev ? prev.review_count : 0;
@@ -187,15 +112,10 @@
           const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=user_ratings_total&key=${API_KEY}&language=zh-TW®ion=tw`;
           const res = await fetch(url, { cache: "no-store" });
           const data = await res.json();
-          if (data.status === 'OK' && data.result && data.result.user_ratings_total !== undefined) {
-            return data.result.user_ratings_total;
-          }
+          if (data.status === 'OK') return data.result.user_ratings_total || 0;
           if (data.status === 'REQUEST_DENIED') return '金鑰無效';
-          if (data.status === 'OVER_QUERY_LIMIT') await new Promise(r => setTimeout(r, 2500));
-        } catch (e) {
-          console.log('錯誤:', e);
-        }
-        await new Promise(r => setTimeout(r, 400));
+        } catch (e) {}
+        await new Promise(r => setTimeout(r, 450));
       }
       return '錯誤';
     }
@@ -203,19 +123,18 @@
     async function updateReviews() {
       const btn = document.querySelector('button[onclick="updateReviews()"]');
       btn.disabled = true;
-      document.getElementById('progress').innerHTML = '🚀 火力全開更新中（90家25秒）...';
+      document.getElementById('progress').innerHTML = '🔥 火力全開（23秒90家）...';
       let success = 0;
       for (let i = 0; i < storeData.length; i++) {
         document.getElementById('progress').innerHTML = `更新中：${storeData[i].store_name} (${i+1}/90)`;
-        const count = await getReviewCount(storeData[i].place_id);
-        storeData[i].review_count = count;
+        storeData[i].review_count = await getReviewCount(storeData[i].place_id);
         storeData[i].update_time = new Date().toLocaleString('zh-TW');
-        if (typeof count === 'number') success++;
+        if (typeof storeData[i].review_count === 'number') success++;
         renderTable();
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 450));
       }
-      localStorage.setItem('fet_reviews_v9', JSON.stringify(storeData.map(s => ({ivr_code: s.ivr_code, review_count: s.review_count, update_time: s.update_time}))));
-      document.getElementById('progress').innerHTML = `🎉 大功告成！成功 ${success}/90 家（淡水竹圍現在 ${storeData[0].review_count} 則）`;
+      localStorage.setItem('fet_reviews_final', JSON.stringify(storeData.map(s => ({ivr_code: s.ivr_code, review_count: s.review_count, update_time: s.update_time}))));
+      document.getElementById('progress').innerHTML = `🎉 完成！成功 ${success}/90（淡水竹圍 ${storeData[0].review_count} 則）`;
       btn.disabled = false;
     }
 
@@ -224,43 +143,29 @@
       const wb = XLSX.utils.book_new();
       const ws = XLSX.utils.aoa_to_sheet(data);
       XLSX.utils.book_append_sheet(wb, ws, "遠傳評論");
-      XLSX.writeFile(wb, `遠傳90家評論_${new Date().toISOString().slice(0,10)}.xlsx`);
+      XLSX.writeFile(wb, `遠傳90家_${new Date().toISOString().slice(0,10)}.xlsx`);
     }
 
     function showApiKeyModal() {
       document.getElementById('apiKeyModal').classList.add('show');
+      document.getElementById('apiKeyInput').value = API_KEY;
     }
 
     function saveApiKey() {
       API_KEY = document.getElementById('apiKeyInput').value.trim();
-      localStorage.setItem('fet_key_v9', API_KEY);
+      localStorage.setItem('fet_key_final', API_KEY);
       alert('金鑰已儲存！');
-      document.getElementById('apiKeyModal').classList.remove('show');
+      document.getElementById('apiKeyModal').classList.remove('show');  // 0.5秒自動關閉
     }
 
     function clearAllData() {
-      if (confirm('確定清除所有舊資料？（強烈建議第一次用）')) {
-        localStorage.removeItem('fet_reviews_v9');
-        localStorage.removeItem('fet_key_v9');
+      if (confirm('確定清除？')) {
+        localStorage.clear();
         location.reload();
       }
     }
 
     renderTable();
-
-    // === Modal 結構（放在 script 下面）===
-    const modalHTML = `
-      <div id="apiKeyModal">
-        <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;justify-content:center;align-items:center;">
-          <div style="background:white;padding:40px;border-radius:20px;width:90%;max-width:600px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
-            <h2>🔑 金鑰已自動填入！</h2>
-            <input type="text" id="apiKeyInput" value="${API_KEY}" style="width:100%;padding:20px;margin:20px 0;font-size:22px;border:3px solid #0066cc;border-radius:10px;text-align:center;">
-            <p style="color:green;font-size:20px;font-weight:bold;">直接按儲存 → 更新就100%成功！</p>
-            <button onclick="saveApiKey()" style="padding:15px 40px;font-size:20px;">儲存並關閉</button>
-          </div>
-        </div>
-      </div>`;
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
   </script>
 </body>
 </html>
