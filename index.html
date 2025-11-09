@@ -2,93 +2,91 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <title>遠傳加盟門市評論工具</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        th { background-color: #f2f2f2; }
-        button { margin-right: 10px; padding: 10px 20px; }
-    </style>
+  <meta charset="UTF-8">
+  <title>遠傳加盟門市評論工具</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    button { margin-right: 10px; padding: 10px 20px; }
+  </style>
 </head>
 <body>
-    <h2>遠傳加盟門市評論工具</h2>
-    <button onclick="updateReviews()">更新評論數</button>
-    <button onclick="downloadExcel()">下載報表</button>
-    <table id="storeTable">
-        <thead>
-            <tr>
-                <th>IVR Code</th>
-                <th>店組名稱</th>
-                <th>Google Maps</th>
-                <th>評論數</th>
-                <th>新增評論</th>
-                <th>是否達標</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+  <h2>遠傳加盟門市評論工具</h2>
+  <button onclick="updateReviews()">更新評論數</button>
+  <button onclick="downloadExcel()">下載報表</button>
+  <table id="storeTable">
+    <thead>
+      <tr>
+        <th>IVR Code</th>
+        <th>店組名稱</th>
+        <th>商家連結</th>
+        <th>目前評論數</th>
+        <th>新增評論數</th>
+        <th>是否達標</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <script>
-        let storeData = [];
+  <script>
+    let storeData = [];
 
-        fetch('store_list.json')
-            .then(response => response.json())
-            .then(data => {
-                storeData = data;
-                renderTable();
-            });
+    fetch("store_list.json")
+      .then(response => response.json())
+      .then(data => {
+        storeData = data;
+        renderTable();
+      });
 
-        function renderTable() {
-            const tbody = document.querySelector("#storeTable tbody");
-            tbody.innerHTML = "";
-            storeData.forEach(store => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${store.ivr_code}</td>
-                    <td>${store.store_name}</td>
-                    <td><a href="${store.store_url}" target="_blank">查看地圖</a></td>
-                    <td class="review-count">-</td>
-                    <td class="new-review">-</td>
-                    <td class="status">-</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
+    function renderTable() {
+      const tbody = document.querySelector("#storeTable tbody");
+      tbody.innerHTML = "";
+      storeData.forEach(store => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${store.ivr_code || "-"}</td>
+          <td>${store.store_name || "-"}</td>
+          <td><a href="${store.store_url}" target="_blank">查看地圖</a></td>
+          <td>${store.review_count || "-"}</td>
+          <td>${store.new_reviews || "-"}</td>
+          <td>${store.status || "-"}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
 
-        function updateReviews() {
-            const rows = document.querySelectorAll("#storeTable tbody tr");
-            rows.forEach(row => {
-                const reviewCount = Math.floor(Math.random() * 500);
-                const newReview = Math.floor(Math.random() * 50);
-                const status = newReview >= 25 ? "✅" : "❌";
-                row.querySelector(".review-count").textContent = reviewCount;
-                row.querySelector(".new-review").textContent = newReview;
-                row.querySelector(".status").textContent = status;
-            });
-        }
+    function updateReviews() {
+      storeData.forEach(store => {
+        const current = Math.floor(Math.random() * 500);
+        const previous = Math.floor(Math.random() * 500);
+        const newReviews = current - previous;
+        store.review_count = current;
+        store.new_reviews = newReviews;
+        store.status = newReviews >= 25 ? "✅" : "❌";
+      });
+      renderTable();
+    }
 
-        function downloadExcel() {
-            const wb = XLSX.utils.book_new();
-            const ws_data = [["IVR Code", "店組名稱", "Google Maps", "評論數", "新增評論", "是否達標"]];
-            const rows = document.querySelectorAll("#storeTable tbody tr");
-            rows.forEach(row => {
-                const cells = row.querySelectorAll("td");
-                ws_data.push([
-                    cells[0].textContent,
-                    cells[1].textContent,
-                    cells[2].querySelector("a").href,
-                    cells[3].textContent,
-                    cells[4].textContent,
-                    cells[5].textContent
-                ]);
-            });
-            const ws = XLSX.utils.aoa_to_sheet(ws_data);
-            XLSX.utils.book_append_sheet(wb, ws, "門市評論");
-            XLSX.writeFile(wb, "遠傳加盟門市評論報表.xlsx");
-        }
-    </script>
+    function downloadExcel() {
+      const ws_data = [
+        ["IVR Code", "店組名稱", "商家連結", "目前評論數", "新增評論數", "是否達標"],
+        ...storeData.map(store => [
+          store.ivr_code,
+          store.store_name,
+          store.store_url,
+          store.review_count || "",
+          store.new_reviews || "",
+          store.status || ""
+        ])
+      ];
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      XLSX.utils.book_append_sheet(wb, ws, "報表");
+      XLSX.writeFile(wb, "遠傳加盟門市評論報表.xlsx");
+    }
+  </script>
 </body>
 </html>
