@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>遠傳加盟門市評論工具</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #d32f2f; }
+    button {
+      margin: 10px 5px; padding: 10px 20px;
+      background-color: #1976d2; color: white;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background-color: #1565c0; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    #loading { color: #555; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>遠傳加盟門市評論工具</h1>
+  <button onclick="updateReviews()">更新評論數</button>
+  <button onclick="downloadReport()">下載報表</button>
+  <div id="loading">資料載入中...</div>
+  <table id="storeTable"></table>
+
+  <script>
+    const apiKey = "AIzaSyBjCmx5gI49M1ik9K-KXBWp0Bdb9hGjHDQ";
+    let storeData = [];
+
+    fetch('store_list_with_reviews.json')
+      .then(response => {
+        if (!response.ok) throw new Error("JSON 載入失敗");
+        return response.json();
+      })
+      .then(data => {
+        storeData = data;
+        renderTable();
+        document.getElementById("loading").style.display = "none";
+      })
+      .catch(error => {
+        document.getElementById("loading").innerText = "載入失敗：" + error.message;
+        console.error(error);
+      });
+
+    function renderTable() {
+      const table = document.getElementById("storeTable");
+      table.innerHTML = `
+        <tr>
+          <th>IVR Code</th>
+          <th>店組名稱</th>
+          <th>Google Maps</th>
+          <th>評論數</th>
+        </tr>
+      `;
+      storeData.forEach(store => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${store.ivr_code}</td>
+          <td>${store.store_name}</td>
+          <td><a href="${store.store_url}" target="_blank">Google Maps</a></td>
+          <td>${store.review_count}</td>
+        `;
+        table.appendChild(row);
+      });
+    }
+
+    async function updateReviews() {
+      document.getElementById("loading").innerText = "評論數更新中...";
+      for (let i = 0; i < storeData.length; i++) {
+        const placeId = storeData[i].place_id;
+        try {
+          const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=user_ratings_total&key=${apiKey}`);
+          const result = await response.json();
+          if (result.result && result.result.user_ratings_total !== undefined) {
+            storeData[i].review_count = result.result.user_ratings_total;
+          }
+        } catch (err) {
+          console.error("更新失敗", err);
+        }
+      }
+      renderTable();
+      document.getElementById("loading").innerText = "評論數已更新！";
+    }
+
+    function downloadReport() {
+      const worksheet = XLSX.utils.json_to_sheet(storeData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "遠傳門市評論報表");
+      XLSX.writeFile(workbook, "遠傳門市評論報表.xlsx");
+    }
+  </script>
+</body>
+</html>
