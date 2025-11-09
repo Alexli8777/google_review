@@ -27,6 +27,7 @@
     a { color: #007bff; text-decoration: none; }
     a:hover { text-decoration: underline; }
     #status { margin-top: 10px; font-style: italic; color: #555; }
+    .error-msg { color: red; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -41,14 +42,14 @@
         <th>IVR Code</th>
         <th>店組名稱</th>
         <th>Google Maps</th>
-        <th>評論數</th>
+        <th>評論數 (錯誤訊息)</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
 
 <script>
-// 儲存所有門市資料，包含從 JSON 檔案中整合的 place_id
+// 儲存所有門市資料
 const storeData = [
   {"ivr_code": 1801517, "store_name": "淡水竹圍", "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/1Xtsng54pP8S2xx7A", "place_id": "ChIJcfH2zHWvQjQRpWq0dQCd88Y"},
   {"ivr_code": 1801396, "store_name": "淡水北新", "store_url": "https://www.google.com/maps?q=https://maps.app.goo.gl/VfeyYLUCkdRc8tp28", "place_id": "ChIJlSxj7lWlQjQR3c_yERP0lZA"},
@@ -143,11 +144,9 @@ const storeData = [
 ];
 
 // !! 警告 !! 
-// 請勿在正式環境中像這樣明碼存放 API 金鑰。
-// 為了安全，請務必在 Google Cloud Console 中限制此金鑰，
-// 只允許它在您的 GitHub Pages 網域中使用。
-// 這裡使用的是您提供的金鑰，請務必替換為您自己受限制的金鑰。
-const apiKey = "AIzaSyC8PAvDsG5ps1lWhB44PT-1lUpD4mWoF1E";
+// 這裡必須填入您在 Google Cloud Console 產生的「新」金鑰
+// 並確認該金鑰已設定「HTTP 參照網址」限制
+const apiKey = "AIzaSyC8PAvDsG5ps1lWhB44PT-1lUpD4mWoF1E"; // <--- 請再次確認您已換成「新」的金鑰
 
 // 獲取 DOM 元素
 const statusDiv = document.getElementById("status");
@@ -163,16 +162,12 @@ function renderTable() {
   storeData.forEach(store => {
     const row = document.createElement("tr");
     
-    // 評論數顯示：
-    // - 如果 review_count 是數字，就顯示數字
-    // - 如果是 "抓取中..."，就顯示 "抓取中..."
-    // - 如果是 "錯誤" 或 "沒有 Place ID"，就顯示錯誤訊息
-    // - 否則（初始狀態），顯示 "-"
     let reviewDisplay = "-";
     if (typeof store.review_count === 'number') {
       reviewDisplay = store.review_count;
     } else if (store.review_count) {
-      reviewDisplay = `<span style="color: red;">${store.review_count}</span>`;
+      // 如果 review_count 欄位有文字，將其視為錯誤訊息並以紅色顯示
+      reviewDisplay = `<span class="error-msg">${store.review_count}</span>`;
     } else if (store.is_loading) {
       reviewDisplay = "<i>抓取中...</i>";
     }
@@ -188,41 +183,45 @@ function renderTable() {
 }
 
 /**
- * 透過 Place ID 獲取評論總數
- * @param {string} placeId - Google Maps Place ID
- * @returns {Promise<number>} - 評論總數
+ * 【已修改】透過 Place ID 獲取評論總數
+ * * - 這個版本會拋出 (throw) 更詳細的錯誤訊息
+ * - 讓 startUpdate() 函式可以捕捉並顯示
  */
 async function getReviewCount(placeId) {
-  // 建立一個包含 API 金鑰的 URL
-  // 欄位只要求 'user_ratings_total'，這是最精簡的請求
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=user_ratings_total&key=${apiKey}`;
   
-  // 建立一個 AbortController 用於設定超時
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 秒超時
 
   try {
     const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timeoutId); // 成功時清除超時
+    clearTimeout(timeoutId); 
 
     if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
+      // 捕捉 HTTP 錯誤 (例如 400, 403, 404)
+      // 這通常代表 URL 不正確或網路層級的拒絕
+      throw new Error(`HTTP ${res.status}: ${res.statusText}`); 
     }
 
     const data = await res.json();
 
     if (data.status === "OK") {
+      // 成功，回傳評論數
       return data.result?.user_ratings_total || 0;
     } else {
-      // 處理 API 回傳的錯誤，例如 "REQUEST_DENIED" (金鑰問題) 或 "OVER_QUERY_LIMIT"
-      console.error(`API Error for ${placeId}: ${data.status}`, data.error_message || '');
-      throw new Error(data.status);
+      // 捕捉 Google API 內部的錯誤狀態
+      // 這才是關鍵！例如：REQUEST_DENIED, OVER_QUERY_LIMIT, INVALID_REQUEST
+      throw new Error(`API Status: ${data.status}`);
     }
   } catch (err) {
-    clearTimeout(timeoutId); // 錯誤時也清除超時
-    console.error(`Fetch error for ${placeId}:`, err.name === 'AbortError' ? 'Timeout' : err.message);
-    // 根據錯誤類型回傳 "錯誤" 或 "超時"
-    throw new Error(err.name === 'AbortError' ? '超時' : 'API 錯誤');
+    clearTimeout(timeoutId); // 清除超時
+    
+    // 捕捉 fetch 本身的錯誤 (例如網路中斷或超時)
+    if (err.name === 'AbortError') {
+        throw new Error("Timeout (5s)"); // 如果是超時
+    }
+    // 重新拋出更詳細的錯誤訊息
+    throw new Error(err.message || "Fetch Error"); 
   }
 }
 
@@ -237,36 +236,33 @@ async function startUpdate() {
 
   let completedCount = 0;
   
-  // 迭代所有門市資料
   for (let i = 0; i < storeData.length; i++) {
     const store = storeData[i];
     store.is_loading = true; // 標記為抓取中
+    store.review_count = undefined; // 清除舊的錯誤訊息
     
-    // 立即更新一次表格，顯示 "抓取中..."
-    if (i % 10 === 0) { // 每處理 10 筆更新一次畫面，避免過度渲染
+    if (i % 10 === 0) { 
         renderTable();
     }
 
-    // 更新狀態列
     statusDiv.textContent = `處理中： ${i + 1} / ${storeData.length} (${store.store_name})`;
 
     try {
       if (store.place_id) {
-        // 直接使用 store.place_id 獲取評論數
         const count = await getReviewCount(store.place_id);
         store.review_count = count;
       } else {
         store.review_count = "沒有 Place ID";
       }
     } catch (err) {
-      // 捕捉 getReviewCount 拋出的錯誤
-      store.review_count = err.message || "錯誤"; 
+      // 【關鍵】捕捉 getReviewCount 拋出的詳細錯誤訊息
+      // 並將其存入 store.review_count
+      store.review_count = err.message || "未知錯誤"; 
     }
     
     store.is_loading = false; // 移除抓取中標記
     completedCount++;
 
-    // 每次 API 呼叫後暫停 50 毫秒，避免超過 QPS 限制 (1000/50 = 20 QPS，遠低於預設的 100 QPS)
     await new Promise(r => setTimeout(r, 50));
   }
 
@@ -284,28 +280,21 @@ async function startUpdate() {
  * 下載 Excel 報表
  */
 function downloadExcel() {
-  if (downloadBtn.disabled) return; // 如果按鈕被禁用，則不執行
+  if (downloadBtn.disabled) return; 
 
-  // 準備要寫入 Excel 的資料
   const wsData = [
-    // 標頭
     ["IVR Code", "店組名稱", "Google Maps", "評論數"],
-    // 內容
     ...storeData.map(store => [
       store.ivr_code,
       store.store_name,
       store.store_url,
-      // 確保 "評論數" 欄位是數字或 "-"，而不是錯誤訊息
       (typeof store.review_count === 'number') ? store.review_count : "-" 
     ])
   ];
 
-  // 建立一個新的
   const wb = XLSX.utils.book_new();
-  // 將陣列資料轉換為 Sheet
   const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-  // 自動調整欄寬
   const cols = [
       { wch: 10 }, // A欄 (IVR Code)
       { wch: 15 }, // B欄 (店組名稱)
@@ -314,10 +303,7 @@ function downloadExcel() {
   ];
   ws['!cols'] = cols;
 
-  // 將 Sheet 加入到
   XLSX.utils.book_append_sheet(wb, ws, "遠傳門市評論數");
-
-  // 觸發瀏覽器下載
   XLSX.writeFile(wb, "遠傳加盟門市評論報表.xlsx");
 }
 
