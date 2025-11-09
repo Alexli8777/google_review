@@ -1,103 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <title>遠傳加盟門市評論工具</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-    th { background-color: #f2f2f2; }
-    button { margin-right: 10px; padding: 10px 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <title>遠傳加盟門市評論工具</title>
+    https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css
 </head>
-<body>
-  <h2>遠傳加盟門市評論工具</h2>
-  <button onclick="updateReviews()">更新評論數</button>
-  <button onclick="downloadExcel()">下載報表</button>
-  <table id="storeTable">
-    <thead>
-      <tr>
-        <th>IVR Code</th>
-        <th>店組名稱</th>
-        <th>Google Maps</th>
-        <th>評論數</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+<body class="container mt-4">
+    <h2 class="mb-3">遠傳加盟門市評論工具</h2>
+    <div class="mb-3">
+        <button class="btn btn-primary" onclick="loadData()">更新評論數</button>
+        <a href="google_reviews_report_updated.xlsx" classiv>
+    <table class="table table-bordered" id="storeTable">
+        <thead class="table-dark">
+            <tr>
+                <th>IVR Code</th>
+                <th>店組名稱</th>
+                <th>Google Maps</th>
+                <th>評論數</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 
-<script>
-const storeData = [{"ivr_code": 1801517, "store_name": "淡水竹圍", "store_url": "https://maps.app.goo.gl/1Xtsng54pP8S2xx7A"}, {"ivr_code": 1801396, "store_name": "淡水北新", "store_url": "https://maps.app.goo.gl/VfeyYLUCkdRc8tp28"}, {"ivr_code": 1801361, "store_name": "基隆大武崙", "store_url": "https://maps.app.goo.gl/xteXJtuFFpftg8rG7"}, {"ivr_code": 1801530, "store_name": "蘆洲中原", "store_url": "https://maps.app.goo.gl/qQVaidgyN4Tas3jh8"}, {"ivr_code": 1805109, "store_name": "台北瑞芳", "store_url": "https://maps.app.goo.gl/oGiLzLdR2qQzVpCG7"}, {"ivr_code": 1801312, "store_name": "基隆暖暖", "store_url": "https://maps.app.goo.gl/Zna1dsuZYRsE2Xas6"}, {"ivr_code": 1805111, "store_name": "瑞芳民生", "store_url": "https://maps.app.goo.gl/W6ovdLiFfqZ8GNnBA"}, {"ivr_code": 1801447, "store_name": "新莊西盛", "store_url": "https://maps.app.goo.gl/YTmykwzBdZJWdnij6"}, {"ivr_code": 1801529, "store_name": "三重三和", "store_url": "https://maps.app.goo.gl/CPnKhEw1JUq6ycqj6"}, {"ivr_code": 1801286, "store_name": "三重溪尾", "store_url": "https://maps.app.goo.gl/uRnoqzVnEYXPjYPX8"}, {"ivr_code": 1801511, "store_name": "三重五華", "store_url": "https://maps.app.goo.gl/eeQmv4U2LNzCWSobA"}, {"ivr_code": 1801181, "store_name": "淡水新市", "store_url": "https://maps.app.goo.gl/heZ3G9pThCuuDb5M9"}, {"ivr_code": 1801423, "store_name": "樹林中華二", "store_url": "https://maps.app.goo.gl/6gDiysx7ezAi52o8A"}, {"ivr_code": 1801482, "store_name": "基隆百福", "store_url": "https://maps.app.goo.gl/7U4FzX2JA2GzytPj6"}, {"ivr_code": 1801500, "store_name": "八里中山", "store_url": "https://maps.app.goo.gl/U28NPsE7vFEF1kto7"}, {"ivr_code": 1801489, "store_name": "新莊富國", "store_url": "https://maps.app.goo.gl/oFWH8y756oKjxfXT9"}, {"ivr_code": 1801289, "store_name": "三峽北大", "store_url": "https://maps.app.goo.gl/tcCC5otUogn2wFtL7"}, {"ivr_code": 1801450, "store_name": "萬華桂林", "store_url": "https://maps.app.goo.gl/EHmJrvux4jww4tg86"}, {"ivr_code": 1801427, "store_name": "鶯歌建國", "store_url": "https://maps.app.goo.gl/aNuaQ1aV3eBGbm8z9"}, {"ivr_code": 1801390, "store_name": "三重中正北", "store_url": "https://maps.app.goo.gl/Qh3BijenmrfMsU7B9"}, {"ivr_code": 1801532, "store_name": "木柵木新", "store_url": "https://maps.app.goo.gl/MefVfJ3D1vgU8cGB9"}, {"ivr_code": 1801507, "store_name": "新莊幸福", "store_url": "https://maps.app.goo.gl/xrgsruPEVrNn5ppQA"}, {"ivr_code": 1801239, "store_name": "土城金城", "store_url": "https://maps.app.goo.gl/ySthwm2jce32pFEV7"}, {"ivr_code": 1801100, "store_name": "中和員山", "store_url": "https://maps.app.goo.gl/KP8sytfG5YStsNeh8"}, {"ivr_code": 1801307, "store_name": "新莊中港", "store_url": "https://maps.app.goo.gl/MAPvpQepENbDS74N9"}, {"ivr_code": 1808101, "store_name": "五股新城", "store_url": "https://maps.app.goo.gl/rPTCtS36e1FujCoc7"}, {"ivr_code": 1801115, "store_name": "蘆洲長安", "store_url": "https://maps.app.goo.gl/vNX1yX87ebkAPuxw8"}, {"ivr_code": 1801503, "store_name": "五股成泰", "store_url": "https://maps.app.goo.gl/kxHvkEYwfyobMwJQ9"}, {"ivr_code": 1801524, "store_name": "七堵明德", "store_url": "https://maps.app.goo.gl/sz32fFLnZLvSeaGm7"}, {"ivr_code": 1801534, "store_name": "基隆聖心", "store_url": "https://maps.app.goo.gl/GvoTW6PJ8BSnCWcWA"}, {"ivr_code": 1801514, "store_name": "羅東中正", "store_url": "https://maps.app.goo.gl/LkV6RY3nvTd7wNGJ9"}, {"ivr_code": 1801497, "store_name": "羅東興東二", "store_url": "https://maps.app.goo.gl/95XyShw6MRwBnwTm7"}, {"ivr_code": 1801469, "store_name": "板橋篤行", "store_url": "https://maps.app.goo.gl/vB26JhrVrNdkhses8"}, {"ivr_code": 1801512, "store_name": "三重三民二", "store_url": "https://maps.app.goo.gl/PqjBYCu99S6TtoXcA"}, {"ivr_code": 1801537, "store_name": "樹林育英", "store_url": "https://maps.app.goo.gl/KYtpcoz9kRiCs3CQ6"}, {"ivr_code": 1801485, "store_name": "林口麗林", "store_url": "https://maps.app.goo.gl/fA2ErdDFAKbNr3vM6"}, {"ivr_code": 1801379, "store_name": "宜蘭頭城", "store_url": "https://maps.app.goo.gl/ZekMzq6iyEdxywKH7"}, {"ivr_code": 1808171, "store_name": "花蓮中山", "store_url": "https://maps.app.goo.gl/xN5CQquAjwQDXSpu7"}, {"ivr_code": 1801536, "store_name": "宜蘭礁溪", "store_url": "https://maps.app.goo.gl/C5kwo8CuJCtSviTn8"}, {"ivr_code": 1801531, "store_name": "泰山明志二", "store_url": "https://maps.app.goo.gl/DRmQ7WaWzCgKt5pT9"}, {"ivr_code": 1801431, "store_name": "吉安中華", "store_url": "https://maps.app.goo.gl/jiXjKkhJfhxs8NQR8"}, {"ivr_code": 1801343, "store_name": "蘇澳中山", "store_url": "https://maps.app.goo.gl/R4SRsXaj3BqLUKGS8"}, {"ivr_code": 1801172, "store_name": "鶯歌南昌", "store_url": "https://maps.app.goo.gl/Ti32VSe8NRbXqJG89"}, {"ivr_code": 1801433, "store_name": "林口文化二", "store_url": "https://maps.app.goo.gl/AbM4GF4Gbf4cVBxX9"}, {"ivr_code": 1801493, "store_name": "中和泰和", "store_url": "https://maps.app.goo.gl/zLTQj7dozh9Cbvds6"}, {"ivr_code": 1801454, "store_name": "宜蘭員山", "store_url": "https://maps.app.goo.gl/SMcGi8rZiAcGQg326"}, {"ivr_code": 1801317, "store_name": "樹林樹新", "store_url": "https://maps.app.goo.gl/N23VTrTuZdTf3x3g8"}, {"ivr_code": 1801336, "store_name": "三峽文化", "store_url": "https://maps.app.goo.gl/n4DvASz2Kfe7NGQ38"}, {"ivr_code": 1805116, "store_name": "基隆深溪", "store_url": "https://maps.app.goo.gl/3ZbmPixbhEdXM77u6"}, {"ivr_code": 1808199, "store_name": "花蓮玉里", "store_url": "https://maps.app.goo.gl/7dUeYhtHHfYzyTev7"}, {"ivr_code": 1801398, "store_name": "蘆洲民族三", "store_url": "https://maps.app.goo.gl/Vwq8Pyfo1SPCALg78"}, {"ivr_code": 1801366, "store_name": "三峽光明", "store_url": "https://maps.app.goo.gl/u1v3HR3N2hVRaUyBA"}, {"ivr_code": 1807037, "store_name": "桃園鶯桃", "store_url": "https://maps.app.goo.gl/rfH6pNadmMdim1tS9"}, {"ivr_code": 1807038, "store_name": "台南東寧二", "store_url": "https://maps.app.goo.gl/QCXhWAKAfM8tLaBM8"}, {"ivr_code": 1807023, "store_name": "中和景平", "store_url": "https://maps.app.goo.gl/jGapmovvzm3p95mj7"}, {"ivr_code": 1807014, "store_name": "永康中北", "store_url": "https://maps.app.goo.gl/kUu7xJ4K6k2W9Pws5"}, {"ivr_code": 1807001, "store_name": "嘉義義竹", "store_url": "https://maps.app.goo.gl/vq8SDHVcCqp2NBsQ8"}, {"ivr_code": 1807005, "store_name": "學甲中正", "store_url": "https://maps.app.goo.gl/aKuYyDgAmi4wKN1K9"}, {"ivr_code": 1807006, "store_name": "白河康樂", "store_url": "https://maps.app.goo.gl/337UtuxwggskPdJ28"}, {"ivr_code": 1807008, "store_name": "關廟中山", "store_url": "https://maps.app.goo.gl/YBN2SFrqkiKVG1jL9"}, {"ivr_code": 1807011, "store_name": "苗栗公館", "store_url": "https://maps.app.goo.gl/ZRUUSDY7TuPYtTUs7"}, {"ivr_code": 1807016, "store_name": "台南西港", "store_url": "https://maps.app.goo.gl/utY1kEWjb23DuV6t5"}, {"ivr_code": 1807018, "store_name": "屏東大連", "store_url": "https://maps.app.goo.gl/j7TXZsCVzhgqawTG7"}, {"ivr_code": 1807024, "store_name": "屏東廣東二", "store_url": "https://maps.app.goo.gl/R95QKbYb7ZUEjNvm6"}, {"ivr_code": 1807030, "store_name": "鳳山南京", "store_url": "https://maps.app.goo.gl/V6qyzuFDTQG6w7Tq9"}, {"ivr_code": 1807039, "store_name": "大溪康莊", "store_url": "https://maps.app.goo.gl/aWoH9L36L29qAHab8"}, {"ivr_code": 1807012, "store_name": "水上中山", "store_url": "https://maps.app.goo.gl/kHCygkh2YK9r1iBu7"}, {"ivr_code": 1807015, "store_name": "善化中正", "store_url": "https://maps.app.goo.gl/jxt3ha3QJU9oRcR26"}, {"ivr_code": 1807021, "store_name": "屏東萬丹", "store_url": "https://maps.app.goo.gl/PnSHV3Li8eGMcDgF8"}, {"ivr_code": 1807027, "store_name": "金山中山二", "store_url": "https://maps.app.goo.gl/DFM9n8iiuKJyWnks7"}, {"ivr_code": 1807029, "store_name": "仁德中正", "store_url": "https://maps.app.goo.gl/bsfixqZ46K8vS1TP8"}, {"ivr_code": 1807042, "store_name": "蘆洲集賢", "store_url": "https://maps.app.goo.gl/CvvuQ7K4umrp1EYW8"}, {"ivr_code": 1807004, "store_name": "屏東林邊", "store_url": "https://maps.app.goo.gl/GqmJHMjgLdpUQ77x5"}, {"ivr_code": 1807022, "store_name": "屏東屏一", "store_url": "https://maps.app.goo.gl/piJJEZQCyaKRg69Y7"}, {"ivr_code": 1807031, "store_name": "台東東海", "store_url": "https://maps.app.goo.gl/RbNtGrthi66Kp2mn8"}, {"ivr_code": 1807036, "store_name": "台南麻豆", "store_url": "https://maps.app.goo.gl/trrY8PTZy5VCmu5U8"}, {"ivr_code": 1807017, "store_name": "屏東明治", "store_url": "https://maps.app.goo.gl/K1kZi4G4ZzFNzzmg8"}, {"ivr_code": 1807034, "store_name": "竹北三民", "store_url": "https://maps.app.goo.gl/24psh4zQJobg9oUP6"}, {"ivr_code": 1808181, "store_name": "土城裕民二", "store_url": "https://maps.app.goo.gl/rmEPvnQZD6bajJ2D7"}, {"ivr_code": 1801198, "store_name": "板橋南雅", "store_url": "https://maps.app.goo.gl/QToRaPbzV6WYJyno6"}, {"ivr_code": 1801384, "store_name": "蘆洲光華", "store_url": "https://maps.app.goo.gl/3PaVZP42fHqHoDXD8"}, {"ivr_code": 1801209, "store_name": "台北深坑", "store_url": "https://maps.app.goo.gl/uRfusccmYRaArxoF9"}, {"ivr_code": 1801146, "store_name": "板橋新海", "store_url": "https://maps.app.goo.gl/J6MLqXSKag69GSkMA"}, {"ivr_code": 1801179, "store_name": "板橋忠孝", "store_url": "https://maps.app.goo.gl/QneLXfqCuwCFBDaLA"}, {"ivr_code": 1801385, "store_name": "新莊民安", "store_url": "https://maps.app.goo.gl/uQFmMusK7Z4ye7Kp6"}, {"ivr_code": 1801214, "store_name": "樹林中山二", "store_url": "https://maps.app.goo.gl/2Z3QW49ixY8y2QbH6"}, {"ivr_code": 1803263, "store_name": "高雄茄萣", "store_url": "https://maps.app.goo.gl/8q3FKJ7XGY79jxqX8"}, {"ivr_code": 1801346, "store_name": "汐止忠孝", "store_url": "https://maps.app.goo.gl/Jw8N6F5NG6BFnkeD7"}, {"ivr_code": 1803261, "store_name": "麻豆中山", "store_url": "https://maps.app.goo.gl/Dpayeykf5H4vN2wh7"}, {"ivr_code": 1803100, "store_name": "嘉義興業", "store_url": "https://maps.app.goo.gl/5FAyzAPSpXDQSntY8"}];
-const apiKey = "AIzaSyAe_aYc35K2Mc9OBUH5BM2EObMfxlo97xM";
-
-function renderTable() {
-  const tbody = document.querySelector("#storeTable tbody");
-  tbody.innerHTML = "";
-  storeData.forEach(store => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${store.ivr_code}</td>
-      <td>${store.store_name}</td>
-      <td><a href="${store.store_url}" target="_blank">查看地圖</a></td>
-      <td>${store.review_count !== undefined ? store.review_count : "-"}</td>
-    `;
-    tbody.appendChild(row);
-  });
-}
-
-async function getPlaceId(storeName) {
-  const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(storeName)}&inputtype=textquery&fields=place_id&key=${apiKey}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.candidates?.[0]?.place_id || null;
-}
-
-async function getReviewCount(placeId) {
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=user_ratings_total&key=${apiKey}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.result?.user_ratings_total || 0;
-}
-
-async function updateReviews() {
-  for (let i = 0; i < storeData.length; i++) {
-    const store = storeData[i];
-    try {
-      const placeId = await getPlaceId(store.store_name);
-      if (placeId) {
-        const count = await getReviewCount(placeId);
-        store.review_count = count;
-      } else {
-        store.review_count = "找不到 Place ID";
-      }
-    } catch (err) {
-      store.review_count = "錯誤";
-    }
-    renderTable();
-    await new Promise(r => setTimeout(r, 500)); // 避免 API 過載
-  }
-}
-
-function downloadExcel() {
-  const wsData = [
-    ["IVR Code", "店組名稱", "Google Maps", "評論數"],
-    ...storeData.map(store => [
-      store.ivr_code,
-      store.store_name,
-      store.store_url,
-      store.review_count || "-"
-    ])
-  ];
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.aoa_to_sheet(wsData);
-  XLSX.utils.book_append_sheet(wb, ws, "評論數");
-  XLSX.writeFile(wb, "遠傳加盟門市評論報表.xlsx");
-}
-
-renderTable();
-</script>
+    <script>
+        async function loadData() {
+            const response = await fetch('store_list.json');
+            const data = await response.json();
+            const tbody = document.querySelector('#storeTable tbody');
+            tbody.innerHTML = '';
+            data.forEach(store => {
+                const row = `
+                    <tr>
+                        <td>${store.ivr_code}</td>
+                        <td>${store.store_name}</td>
+                        <td>${store.store_url}查看地圖</a></td>
+                        <td>${store.review_count}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+        loadData(); // 預設載入
+    </script>
 </body>
 </html>
